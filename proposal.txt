@@ -1,0 +1,47 @@
+Barbaroo--Barbers for you.
+
+This app is an on demand haircut delivery service which allows you to order a haircut and have a stylist come to you.
+
+MINIMUM VIABLE PRODUCT:
+
+    * Landing page with the option to order services
+
+    * Page where you pick services from a list, or add your own. Uses a database to pull services from. Pick a time slot as well.
+
+    * List of barbers. Pick a barber. Later, barbers will have their own pricing schedules and dynamic pricing depending on their schedule.
+
+    * Last page is the confirmation page that displays the appointment time. 
+
+NEXT STEP:
+
+    * Make the database mature--initially it will be dummy data, this will flesh it all out with unique data.
+
+    * Barber profile pages
+
+THIRD STEP:
+
+    * Add in reviews for barbers
+
+    * Map api.
+
+    * Easter egg game
+
+    * Dynamic pricing depending on time/business
+
+    * Favorite barber.
+
+# Technologies Used
+
+    * Handlebars
+
+    * Sequelize 
+    
+    * mysql for database
+
+    * express
+
+    * passport--for login system
+
+
+
+Mohamed Naji. Kevin Conway. Wynston Saamoi. Austin Fortson. Christopher Killen.
