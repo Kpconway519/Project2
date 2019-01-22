@@ -1,5 +1,6 @@
 const dotenv = require("dotenv")
 var express = require("express");
+require("dotenv").config();
 
 var PORT = process.env.PORT || 9001;
 
@@ -20,6 +21,11 @@ app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
 var routes = require("./controllers/controller.js");
+
+//kevin conway's route
+var apiRoutes = require("./controllers/api-routes.js");
+
+apiRoutes(app);
 
 app.use(routes);
 
