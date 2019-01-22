@@ -27,7 +27,6 @@ module.exports = function (app) {
       location: barber.location
     });
   });
-    // NOT DONE YET
 
   app.post("/customer/new", function (req, res) {
 
@@ -39,7 +38,6 @@ module.exports = function (app) {
       location: customer.location
     });
   });
-        // NOT DONE YET
 
   app.post("/service/new", function (req, res) {
 
