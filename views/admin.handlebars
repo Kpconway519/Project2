@@ -206,7 +206,7 @@
       duration: $("#service_duration").val().trim()
     };
   
-    $.post("/barber/new", newService)
+    $.post("/service/new", newService)
       .then(function(data) {
         console.log(data);
         alert("Adding new service");
