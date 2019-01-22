@@ -26,6 +26,8 @@ module.exports = function (app) {
       last_name: barber.lastName,
       location: barber.location
     });
+    res.status(204).end();
+
   });
 
   app.post("/customer/new", function (req, res) {
@@ -37,6 +39,8 @@ module.exports = function (app) {
       last_name: customer.lastName,
       location: customer.location
     });
+    res.status(204).end();
+
   });
 
   app.post("/service/new", function (req, res) {
@@ -44,12 +48,13 @@ module.exports = function (app) {
     var service = req.body
 
     Service.create({
-      service: service.service,
+      name: service.name,
       description: service.description,
       price: service.price,
       duration: service.duration
     });
+    res.status(204).end();
+
   });
 
-res.status(204).end();
 };

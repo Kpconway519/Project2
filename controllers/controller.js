@@ -54,7 +54,15 @@ var router = express.Router();
 
             router.get("/allbarbers", function(req, res) {
                 //this is gonna be a dynamic thing which adds in all the barbers from the database
-                res.render("allbarbers.handlebars" /*,  {  INSERT HANDLEBARS STUFF HERE  }*/)
+
+                // Get this function right///////////////////////
+                Barber.findAll({})
+                .then(function(data) {
+                    let barbObject = {
+                        barbers: data
+                    };
+                    res.render("allbarbers.handlebars" , barbObject);
+                });
             })
 
             router.get("/allreviews", function(req, res) {
