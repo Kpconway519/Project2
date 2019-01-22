@@ -31,7 +31,16 @@ var router = express.Router();
             });
             //                  BARBER PAGE
             router.get("/barber", function(req, res) {
-                res.render("barber.handlebars");
+                                //this is gonna be a dynamic thing which adds in all the barbers from the database
+
+                // Get this function right///////////////////////
+                Barber.findAll({})
+                .then(function(data) {
+                    let barbObject = {
+                        barbers: data
+                    };
+                    res.render("barber.handlebars" , barbObject);
+                });
             })
             //                  CONFIRMATION SCREEN
             router.get("/confirm", function(req, res) {

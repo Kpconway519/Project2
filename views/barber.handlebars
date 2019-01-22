@@ -1,5 +1,24 @@
 <h1>THIS IS THE BARBER SCREEN</h1>
 
+
+ {{#each barbers}}
+    <div class="row">
+        <div class="card">
+            <h2>
+                {{first_name}}
+            </h2>
+            <h2>
+                {{last_name}}
+            </h2>
+            <h2>
+                {{location}}
+            </h2>
+        </div>
+    </div>
+  {{/each}}
+
+
+
 <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">
 
 
