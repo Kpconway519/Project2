@@ -47,6 +47,10 @@ var router = express.Router();
                 res.render("confirm.handlebars")
             })
 
+            router.get("/appointment", function(req, res) {
+                res.render("appointment.handlebars")
+            })
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                              END OF ORDER FLOW                                               //
 //////////////////////////////////////////////////////////////////////////////////////////////////

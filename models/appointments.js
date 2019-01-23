@@ -9,7 +9,10 @@ var Appts = sequelize.define("appts", {
   barber_id: Sequelize.INTEGER,
   time: Sequelize.STRING,
   location: Sequelize.STRING,
-  paid: Sequelize.BOOLEAN
+  cost: Sequelize.FLOAT,
+  services: Sequelize.STRING,
+  paid: Sequelize.BOOLEAN,
+  completed: Sequelize.BOOLEAN
 });
 
 // Syncs with DB
