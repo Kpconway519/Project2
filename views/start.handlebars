@@ -1,29 +1,49 @@
-<h1>THIS IS THE START SCREEN</h1>
+<!--Choosing Client or Barber-->
+<div class ="col">
+  <div class="row">
+    <div class="container">
+      <div id="Client" class="tabcontent">
+        <h1>Client</h1>
+        <p>Are you looking for a haircut?</p>
+        <button class="btn btn-outline-light font-weight-bold" id="confirm">Confirm</button>
+      </div>
+        
+      <div id="Barber" class="tabcontent">
+        <h1>Barber</h1> 
+        <p>Are you looking for work?</p> 
+        <button class="btn btn-outline-light font-weight-bold" id="confirm">Confirm</button>
+      </div>
+        
+      <button class="tablink font-weight-bold" onclick="openCity('Client', this, 'red')" id="defaultOpen">Client</button>
+      <button class="tablink font-weight-bold" onclick="openCity('Barber', this, 'blue')">Barber</button>
+      </div>
+    </div>
+  </div>
+  <!--End of Choosing-->
 
+<!--Script from W3 schools-->
+<script>
+function openCity(cityName, elmnt, color) {
+  // Hide all elements with class="tabcontent" by default */
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
 
+  // Remove the background color of all tablinks/buttons
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
 
+  // Show the specific tab content
+  document.getElementById(cityName).style.display = "block";
 
+  // Add the specific color to the button used to open the tab content
+  elmnt.style.backgroundColor = color;
+}
 
-<button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">
-
-
-<a href="/order">
-<div>
-<h2 style="color: white;">Order Service</h2>
-</div>
-</a>
-
-
-
-</button>
-
-
-
-
-
-
-
-
-
-
-
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>

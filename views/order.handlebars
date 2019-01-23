@@ -1,14 +1,62 @@
-<h1>THIS IS THE ORDER SCREEN</h1>
-
-<button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">
-
-
-
-<a href="/barber">
-<div>
-<h2 style="color: white;">CONFIRM SERVICE AND ORDER A BARBER</h2>
+<!--Table for Services and Prices-->
+<div class="container" id="services">
+    <input class="form-control" id="input" type="text" placeholder="Search for a service...">
+    <br>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <th>Service</th>
+            <th>Price $</th>
+            <th>Find a Barber</th>
+        </thead>
+        <tbody id="table">
+            <tr>
+                <td>Haircut (regular)</td>
+                <td>$15</td>
+                <td><button type="button" class="btn btn-primary">Add</button></td>
+            </tr>
+            <tr>
+                <td>Taper Haircut & Lineup</td>
+                <td>$18</td>
+                <td><button type="button" class="btn btn-primary">Add</button></td>            
+            <tr>
+                <td>Head Lineup Only</td>
+                <td>$5</td>
+                <td><button type="button" class="btn btn-primary">Add</button></td>
+            </tr>
+            <tr>
+                <td>Head Shave</td>
+                <td>$25</td>
+                <td><button type="button" class="btn btn-primary">Add</button></td>
+            </tr>
+            <tr>
+                <td>Beard Lineup</td>
+                <td>$15</td>
+                <td><button type="button" class="btn btn-primary">Add</button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-</a>
+    <!--End of Table-->
+<!--Start of Side Nav-->
+<div id="mySidenav" class="sidenav">
+    <a href="/" id="home">Back to Home</a>
+    <a href="/barber" id="barberPage">Go To Barbers</a>
+    <a href="#" id="social">Social Media</a>
+</div>
+    <!--End of Side Nav-->
 
+<div class="container">
+<button type="button" class="btn btn-primary btn-lg btn-block" id="goToBarber" href="/barber">Search Barbers</button>
+</div>
 
-</button>
+<!--Seach script-->
+<script>
+        $(document).ready(function(){
+          $("#input").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#table tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
