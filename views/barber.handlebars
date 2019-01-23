@@ -1,32 +1,91 @@
-<h1>THIS IS THE BARBER SCREEN</h1>
-
-
- {{#each barbers}}
-    <div class="row">
-        <div class="card">
-            <h2>
-                {{first_name}}
-            </h2>
-            <h2>
-                {{last_name}}
-            </h2>
-            <h2>
-                {{location}}
-            </h2>
-        </div>
-    </div>
+<!--Barber Selections-->
+<div class="container">
+      <h2 style="color:white" >Choose a Barber You Like!</h2>
+      <br>
+      <h5 style="color:white">Filter Barbers by Services</h5> 
+      <!--Filter Buttons-->   
+      <div id="myBtnContainer">
+        <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+        <button class="btn" onclick="filterSelection('Haircut')"> Haircut (regular)</button>
+        <button class="btn" onclick="filterSelection('Taper_Haircut_and_Lineup')"> Taper Haircut & Lineup</button>
+        <button class="btn" onclick="filterSelection('Head_Lineup_Only')"> Head Lineup Only</button>
+        <button class="btn" onclick="filterSelection('Head_Shave')"> Head Shave</button>
+        <button class="btn" onclick="filterSelection('Beard_Linup')"> Beard Lineup</button>
+    <div>
+    <!--End of Filter Buttons-->
+<!--Dummy Data-->
+{{#each barbers}}
+      <div class="card filterDiv Haircut Head_Lineup_Only Beard_Linup" style="width: 18rem;">
+            <img class="card-img-top" src="https://hsto.org/getpro/habr/post_images/6ed/d94/57e/6edd9457ec4ef14fd413377a3cfb0fb4.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{first_name}} {{last_name}}</h5>
+              <p class="card-text">{{location}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">What services they offer</li>
+              <li class="list-group-item">What services they offer</li>
+              <li class="list-group-item">what services they offer</li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Link to barber profile</a>
+            </div>
+          </div>
   {{/each}}
 
-
-
-<button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">
-
-
-<a href="/confirm">
-<div>
-<h2 style="color: white;">CONFIRM BARBER AND SERVICE!</h2>
+        <!--End of Dummy Data-->
 </div>
-</a>
+    <!--End of Selections-->
 
+<!--Start of Side Nav-->
+<div id="mySidenav" class="sidenav">
+    <a href="/" id="home">Back to Home</a>
+    <a href="/order" id="servicesPage">Go To Services</a>
+    <a href="#" id="social">Social Media</a>
+</div>
+    <!--End of Side Nav-->
 
-</button>
+<!--Filtering script from W3 Schools-->
+<script>
+        filterSelection("all")
+        function filterSelection(c) {
+          var x, i;
+          x = document.getElementsByClassName("filterDiv");
+          if (c == "all") c = "";
+          for (i = 0; i < x.length; i++) {
+            w3RemoveClass(x[i], "show");
+            if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+          }
+        }
+        
+        function w3AddClass(element, name) {
+          var i, arr1, arr2;
+          arr1 = element.className.split(" ");
+          arr2 = name.split(" ");
+          for (i = 0; i < arr2.length; i++) {
+            if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+          }
+        }
+        
+        function w3RemoveClass(element, name) {
+          var i, arr1, arr2;
+          arr1 = element.className.split(" ");
+          arr2 = name.split(" ");
+          for (i = 0; i < arr2.length; i++) {
+            while (arr1.indexOf(arr2[i]) > -1) {
+              arr1.splice(arr1.indexOf(arr2[i]), 1);     
+            }
+          }
+          element.className = arr1.join(" ");
+        }
+        
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].addEventListener("click", function(){
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+          });
+        }
+</script>
