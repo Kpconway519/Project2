@@ -1,5 +1,9 @@
 const dotenv = require("dotenv")
-var express = require("express");
+const express = require("express");
+const bodyParser = require("body-parser");
+const expressSession = require("express-session");
+const passport = require("passport");
+
 require("dotenv").config();
 
 var PORT = process.env.PORT || 9001;
@@ -10,8 +14,13 @@ var app = express();
 app.use(express.static("public"));
 
 // Parse application body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+//Authentication
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
