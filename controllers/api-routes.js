@@ -57,4 +57,9 @@ module.exports = function (app) {
 
   });
 
+  app.post("/login", function(req, res) {
+    console.log(req.body);
+    res.send(200);
+  });
+
 };
