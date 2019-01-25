@@ -11,6 +11,10 @@ var Barber = require("../models/barber.js");
 var Customer = require("../models/customer.js");
 var Service = require("../models/services.js");
 
+//Require multer 
+const multer = require('multer');
+const upload = multer();
+
 // Routes
 // =============================================================
 module.exports = function (app) {
@@ -57,7 +61,7 @@ module.exports = function (app) {
 
   });
 
-  app.post("/login", function(req, res) {
+  app.post("/login", upload.array(), function(req, res) {
     console.log(req.body);
     res.send(200);
   });
