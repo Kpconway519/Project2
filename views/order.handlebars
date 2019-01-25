@@ -1,38 +1,26 @@
 <!--Table for Services and Prices-->
 <div class="container" id="services">
+    <h1 style="color: white;">Click button to add a service to your appointment, you can add up to 3.</h1>
     <input class="form-control" id="input" type="text" placeholder="Search for a service...">
     <br>
     <table class="table table-bordered table-striped">
         <thead>
             <th>Service</th>
-            <th>Price $</th>
-            <th>Find a Barber</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Duration</th>
+            <th>Add Service</th>
         </thead>
         <tbody id="table">
+            {{#each services}}
             <tr>
-                <td>Haircut (regular)</td>
-                <td>$15</td>
-                <td><button type="button" class="btn btn-primary">Add</button></td>
+                <td>{{name}}</td>
+                <td>{{description}}</td>
+                <td>{{price}}</td>
+                <td>{{duration}}</td>
+                <td><button type="button" class="btn btn-primary" data-id="{{id}}">Add</button></td>
             </tr>
-            <tr>
-                <td>Taper Haircut & Lineup</td>
-                <td>$18</td>
-                <td><button type="button" class="btn btn-primary">Add</button></td>            
-            <tr>
-                <td>Head Lineup Only</td>
-                <td>$5</td>
-                <td><button type="button" class="btn btn-primary">Add</button></td>
-            </tr>
-            <tr>
-                <td>Head Shave</td>
-                <td>$25</td>
-                <td><button type="button" class="btn btn-primary">Add</button></td>
-            </tr>
-            <tr>
-                <td>Beard Lineup</td>
-                <td>$15</td>
-                <td><button type="button" class="btn btn-primary">Add</button></td>
-            </tr>
+            {{/each}}
         </tbody>
     </table>
 </div>
@@ -45,13 +33,11 @@
 </div>
     <!--End of Side Nav-->
 
-<!--Search Barbers Buttons-->
 <div class="container">
 <a href="/barber">
 <button type="button" class="btn btn-primary btn-lg btn-block" id="goToBarber" href="/barber">Search Barbers</button>
 </a>
 </div>
-    <!--End of Search Barbers Button-->
 
 <!--Seach script-->
 <script>
@@ -63,4 +49,56 @@
             });
           });
         });
-    </script>
+</script>
+
+<script>
+    var servArray = []
+
+    //function that affects the add buttons to add them to the array.
+
+    //function which acts when you click the submit button at the bottom of the page.
+</script>
+{{!-- 
+
+                                Make the Order page work. 
+
+Click on up to 3 services. The services you click will be added to a new appointment row. 
+
+
+                This all gets wrapped in an onclick function for the button at the bottom of the page {
+
+* The Id for the appointment row will be stored in local storage.
+
+        make an object to send to the route to make a new appointment. {
+
+* customer id is set as one for the appointment
+* Comments from the comment blank will be put into the “comments” section
+* Cost gets calculated on this page—just add up the total cost of the services selected.
+* Duration, like price, just adds up all the durations and puts it as an integer into the appointments     table. 
+        } //end of the object that gets sent to the route
+        
+}
+
+
+
+
+
+
+                                NOTES ON HOW TO DO STUFF:
+
+There should be a blank for comments at the bottom,
+
+Accepted is going to start out blank. I’ll figure out how to do this later. 
+
+Barber_id is gonna get set on the next page when the user selects a barber.
+
+Time gets set later on the appointments screen
+
+Location gets set later on the appointments screen.
+
+Paid is gonna be blank for now until we figure out some kind of payment flow
+
+Completed is going to be blank, that is something which can be put in the Barber’s homepage later on.
+
+DURATION AND PRICE ARE IN WHOLE NUMBERS. UNITS ARE MINUTES AND DOLLARS
+ --}}
