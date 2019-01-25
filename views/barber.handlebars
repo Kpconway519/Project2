@@ -11,11 +11,13 @@
         <button class="btn" onclick="filterSelection('Head_Lineup_Only')"> Head Lineup Only</button>
         <button class="btn" onclick="filterSelection('Head_Shave')"> Head Shave</button>
         <button class="btn" onclick="filterSelection('Beard_Linup')"> Beard Lineup</button>
-    <div>
+    </div>
     <!--End of Filter Buttons-->
-<!--Dummy Data-->
+
+<!--Barber Data-->
+<div class="container">
 {{#each barbers}}
-      <div class="card filterDiv Haircut Head_Lineup_Only Beard_Linup" style="width: 18rem;">
+      <div class="card filterDiv {{service}}" style="width: 18rem;">
             <img class="card-img-top" src="https://hsto.org/getpro/habr/post_images/6ed/d94/57e/6edd9457ec4ef14fd413377a3cfb0fb4.png" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{first_name}} {{last_name}}</h5>
@@ -31,9 +33,9 @@
             </div>
           </div>
   {{/each}}
+  </div>
+        <!--End of Barber Data-->
 
-        <!--End of Dummy Data-->
-</div>
     <!--End of Selections-->
 
 <!--Start of Side Nav-->
@@ -44,13 +46,14 @@
 </div>
     <!--End of Side Nav-->
 
-
-<div class="row">
-  <a href="/appointment">
-  <button>Confirm barber and set appointment</button>
-
-  </a>
+<!--Confirm barber and set appointment button-->
+<div class="container">
+<a href="/appointment">
+<button type="button" class="btn btn-primary btn-lg btn-block" id="confirmBarber">Confirm Barber and Set Appointment</button>
+</a>
 </div>
+    <!--End of Confirm Barber Button-->
+
 
 
 
