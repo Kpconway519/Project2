@@ -14,10 +14,10 @@
         <tbody id="table">
             {{#each services}}
             <tr>
-                <td>{{name}}</td>
-                <td>{{description}}</td>
-                <td>{{price}}</td>
-                <td>{{duration}}</td>
+                <td id = "name">        {{name}}</td>
+                <td id = "description"> {{description}}</td>
+                <td id = "price">       {{price}}</td>
+                <td id = "duration">    {{duration}}</td>
                 {{!-- for the add services button, I think the bootstrap classes are messing up the function. Not sure how to get around that for now. --}}
                 <td><button data-id="{{id}}" class="addServ" type="button" class="btn btn-primary" >Add</button></td>
             </tr>
@@ -26,6 +26,11 @@
     </table>
 </div>
     <!--End of Table-->
+
+<!--Snackbar pop up confirming selection of service-->
+<div id = "snackbar"></div>
+    <!--End of snackbar pop up-->
+
 <!--Start of Side Nav-->
 <div id="mySidenav" class="sidenav">
     <a href="/" id="home">Back to Home</a>
@@ -50,7 +55,28 @@
             });
           });
         });
+
+        function searchBar() {
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('myInput');
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table");
+        td = ul.getElementsByTagName('td');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < td.length; i++) {
+        a = td[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        td[i].style.display = "";
+        } else {
+        td[i].style.display = "none";
+            }
+        }
+        }
 </script>
+    <!--End of search Script-->
 
 <script>
     var servArray = []
@@ -66,7 +92,33 @@
     }else{
         alert("You may only add up to 3 services!")
     }
-    })
+    });
+
+    //Start of Snack bar popup message confirming the selectiong of a service
+    $(".addServ").on("click", function(event) {
+        event.preventDefault()
+        if (servArray.length < 3 ) {
+        var x = document.getElementById("snackbar");
+        // Add the "show" class to DIV
+        x.className = "show";
+        //Display selected service
+        document.getElementById("snackbar").innerHTML ="Service has been added!";
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        } else {
+            var x = document.getElementById("snackbar");
+            // Add the "show" class to DIV
+            x.className = "show";
+            //Display selected service
+            document.getElementById("snackbar").innerHTML ="Service has been added, Cart is now full!";
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+    });
+    //End of snack bar pop up message
+
+    
+
 
     //function which acts when you click the submit button at the bottom of the page.
 </script>
