@@ -140,3 +140,26 @@ nav {
 }
 
     /* End styling for barber page */
+
+/* Styling for Appointment Page */
+
+    /* End stylign for Appointment Page */
+
+/*Styling for confirm page */
+#checkImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+#confirmDiv {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+
+}
+
+    /* End styling for confirm page */
