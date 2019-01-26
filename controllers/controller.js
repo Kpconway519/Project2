@@ -3,7 +3,7 @@ var Appointment = require("../models/appointments.js");
 var Barber = require("../models/barber.js");
 var Customer = require("../models/customer.js");
 var Review = require("../models/reviews.js");
-
+var Service = require("../models/services.js")
 var router = express.Router();
 
 
@@ -27,7 +27,14 @@ var router = express.Router();
 
             //                  ORDER PAGE
             router.get("/order", function(req, res) {
-                res.render("order.handlebars");
+
+                Service.findAll({})
+                .then(function(data) {
+                    let ordObject = {
+                        services: data
+                    };                    
+                    res.render("order.handlebars", ordObject);
+                });
             });
             //                  BARBER PAGE
             router.get("/barber", function(req, res) {

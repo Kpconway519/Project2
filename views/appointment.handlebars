@@ -3,6 +3,82 @@
 
 <!--Set time and confirm button-->
 <div class="container">
+
+
+
+
+{{!-- Dropdown for the Day --}}
+
+
+
+
+
+<div class="dropdown open">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+                Day
+            </button>
+    <div class="dropdown-menu" aria-labelledby="triggerId">
+        <button class="dropdown-item" href="#">Today</button>
+        <button class="dropdown-item" href="#">Today + 1</button>
+        <button class="dropdown-item" href="#">Today + 2</button>
+        <button class="dropdown-item" href="#">Today + 3</button>
+        <button class="dropdown-item" href="#">Today + 4</button>
+    </div>
+</div>
+
+
+
+
+
+
+{{!-- dropdown for the time. Maybe we can find a little better way to implement this.--}}
+
+<div class="dropdown open">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+                Hour
+            </button>
+    <div class="dropdown-menu" aria-labelledby="triggerId">
+        <button class="dropdown-item" href="#">8AM</button>
+        <button class="dropdown-item" href="#">9AM</button>
+        <button class="dropdown-item" href="#">10AM</button>
+        <button class="dropdown-item" href="#">11AM</button>
+        <button class="dropdown-item" href="#">Noon</button>
+        <button class="dropdown-item" href="#">1pm</button>
+        <button class="dropdown-item" href="#">2pm</button>
+        <button class="dropdown-item" href="#">3pm</button>
+        <button class="dropdown-item" href="#">4pm</button>
+        <button class="dropdown-item" href="#">5pm</button>
+        <button class="dropdown-item" href="#">6pm</button>
+        <button class="dropdown-item" href="#">7pm</button>
+    </div>
+</div>
+
+{{!-- dropdown for the minutes. Poss can find better way to have this, like a pre-made version --}}
+
+<div class="dropdown open">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+                Minute
+            </button>
+    <div class="dropdown-menu" aria-labelledby="triggerId">
+        <button class="dropdown-item" href="#">05</button>
+        <button class="dropdown-item" href="#">10</button>
+        <button class="dropdown-item" href="#">15</button>
+        <button class="dropdown-item" href="#">20</button>
+        <button class="dropdown-item" href="#">25</button>
+        <button class="dropdown-item" href="#">30</button>
+        <button class="dropdown-item" href="#">35</button>
+        <button class="dropdown-item" href="#">40</button>
+        <button class="dropdown-item" href="#">45</button>
+        <button class="dropdown-item" href="#">50</button>
+        <button class="dropdown-item" href="#">55</button>
+    </div>
+</div>
+
+
+
 <a href="/confirm">
 <button type="button" class="btn btn-primary btn-lg btn-block" id="setTimeConfirm">Set Time and Confirm</button>
 </a>

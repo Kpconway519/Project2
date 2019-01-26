@@ -18,7 +18,8 @@
                 <td>{{description}}</td>
                 <td>{{price}}</td>
                 <td>{{duration}}</td>
-                <td><button type="button" class="btn btn-primary" data-id="{{id}}">Add</button></td>
+                {{!-- for the add services button, I think the bootstrap classes are messing up the function. Not sure how to get around that for now. --}}
+                <td><button data-id="{{id}}" class="addServ" type="button" class="btn btn-primary" >Add</button></td>
             </tr>
             {{/each}}
         </tbody>
@@ -39,7 +40,7 @@
 </a>
 </div>
 
-<!--Seach script-->
+<!--Search script-->
 <script>
         $(document).ready(function(){
           $("#input").on("keyup", function() {
@@ -55,6 +56,17 @@
     var servArray = []
 
     //function that affects the add buttons to add them to the array.
+    $(".addServ").on("click", function(event) {
+        event.preventDefault()
+    if (servArray.length < 3) {
+        var servID = $(this).data("id")
+        servArray.push(servID)
+
+        console.log(servArray)
+    }else{
+        alert("You may only add up to 3 services!")
+    }
+    })
 
     //function which acts when you click the submit button at the bottom of the page.
 </script>
