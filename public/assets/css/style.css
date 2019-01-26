@@ -15,12 +15,12 @@ nav {
 
 #confirm {
 	background-color: #ffffff;
-	color:black;
+	color: #333333;
 }
   /* Style the tab buttons */
 .tablink {
-    background-color: black;
-    color: White;
+    background-color:#333333;
+    color: #ffffff;
     float: left;
     border: none;
     outline: none;
@@ -32,20 +32,20 @@ nav {
   
   /* Change background color of buttons on hover */
 .tablink:hover {
-    background-color: black;
+    background-color:#333333;
 }
   
   /* Set default styles for tab content */
 .tabcontent {
-    color: white;
+    color: #ffffff;
     display: none;
     padding: 50px;
     text-align: center;
 }
   
   /* Style each tab content individually */ 
-#Client {background-color:red;}
-#Barber {background-color:blue;}
+#Client {background-color:#af1d1d;}
+#Barber {background-color: #163d75;}
 
   /* End Styling for first page */
 
@@ -68,22 +68,22 @@ nav {
   
 #home {
     top: 60px;
-    background-color: blue;
+    background-color: #163d75;
 }
   
 #barberPage {
     top: 140px;
-    background-color: lightgray;
+    background-color: #ccc;
 }
 
 #servicesPage {
     top: 140px;
-    background-color: lightgray;
+    background-color: #ccc;
 }  
   
 #social {
     top: 220px;
-    background-color: red;
+    background-color:#af1d1d;
 }
     /* End Styling for sidenav */
 
@@ -126,17 +126,17 @@ nav {
   outline: none;
   padding: 12px 16px;
   background-color: #163d75;
-  color: white;
+  color: #ffffff;
   cursor: pointer;
 }
 
 .btn:hover {
-  background-color: #ddd;
+  background-color:#cccccc;
 }
 
 .btn.active {
-  background-color: #666;
-  color: white;
+  background-color: #ccc;
+  color: #ffffff;
 }
 
     /* End styling for barber page */
@@ -156,7 +156,7 @@ nav {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    background-color: white;
+    background-color:#ffffff;
     padding: 20px;
     text-align: center;
     width: 800px;
