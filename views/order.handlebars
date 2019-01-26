@@ -124,20 +124,7 @@
         };
     })
 
-
-
-    //AUSTIN: can you make a system to dynamically show the servArray on the screen so the user knows what they've chosen? Or like make the row red if they selected that one?
-
-
-
-
-
-
-
     //function which acts when you click the submit button at the bottom of the page.
-
-
-
 
     $("#goToBarber").on("click", function (event) {
         event.preventDefault();
@@ -172,7 +159,7 @@ let calculateDuration = function() {
 
 
 
-        let pushServicesToDb = function () {
+        let pushServicesToDb = function (cb) {
 
             if (servArray.length === 0) {
                 alert("you must select at least one service")
@@ -233,10 +220,18 @@ let calculateDuration = function() {
                 }
 
             };
+            cb()
         }
         //then go to the next page when that is done
 
-        pushServicesToDb()
+        pushServicesToDb(function() {
+            if (servArray >= 1) {
+
+            location.href = "/barber"
+            }else{
+                alert('you must select at least one service')
+            }
+        })
 
         //* The Id for the appointment row will be stored in local storage.
 

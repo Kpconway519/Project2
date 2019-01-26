@@ -63,7 +63,7 @@ module.exports = function (app) {
   });
 
   app.post("/appointment/new", function (req, res) {
-
+    console.log('appointment function called')
     var appointment = req.body
 
     Appointment.create({
@@ -81,12 +81,13 @@ module.exports = function (app) {
       completed: appointment.completed
           
     });
+    res.render("barber.handlebars")
     res.status(204).end();
   });
 
-  // app.post("/login", upload.array(), function(req, res) {
-  //   console.log(req.body);
-  //   res.send(200);
+  app.post("/login", upload.array(), function(req, res) {
+    console.log(req.body);
+    res.send(200);})
   
   app.post("/customer/login", upload.array(), function(req, res) {
     //check to see if login worked

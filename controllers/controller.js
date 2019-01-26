@@ -81,7 +81,7 @@ function authenticate(req, res, next) {
                 res.render("login.handlebars", { "type" : "customer" })
             })
 
-            router.get("barber/login", function(req, res) {
+            router.get("/barber/login", function(req, res) {
                 res.render("login.handlebars", { "type" : "barber"})
             })
 
