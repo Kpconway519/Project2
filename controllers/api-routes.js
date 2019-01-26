@@ -11,6 +11,7 @@ var Barber = require("../models/barber.js");
 var Customer = require("../models/customer.js");
 var Service = require("../models/services.js");
 
+
 //Require multer 
 const multer = require('multer');
 const upload = multer();
@@ -83,9 +84,79 @@ module.exports = function (app) {
     res.status(204).end();
   });
 
-  app.post("/login", upload.array(), function(req, res) {
-    console.log(req.body);
-    res.send(200);
+  // app.post("/login", upload.array(), function(req, res) {
+  //   console.log(req.body);
+  //   res.send(200);
+  
+  app.post("/customer/login", upload.array(), function(req, res) {
+    //check to see if login worked
+    Customer.findOne({ where : { username : req.body.username}}).then((dbPost) => {
+      if(dbPost.password === req.body.password) {
+
+        console.log(req.sessionId);
+        req.session.authenticated = true;
+        res.send(req.session.id);
+      } else {
+        res.send("Failure");
+      }
+    });
   });
+
+  app.post("/barber/login", upload.array(), function(req, res) {
+    //check to see if login worked
+    Barber.findOne({ where : { username : req.body.username}}).then((dbPost) => {
+      if(dbPost.password === req.body.password) {
+        req.session.authenticated = true;
+        res.send(req.session.id);
+      } else {
+        res.send("Failure");
+      }
+    });
+  });
+
+  app.post("/customer/signup", upload.array(), function(req, res)  {
+    let username = req.body.username;
+    let password = req.body.password;
+    Customer.findOne({ where : { username : username }}).then((dbpost) => {
+      console.log(dbpost)
+      if(dbpost === null) {
+        Customer.create({
+          username : username,
+          password : password
+        }).then(dbPost => {
+          //Sign up Success
+
+          res.send("Made");
+        });
+      } else {
+        //redirect with username exist
+        res.send("Existing username");
+      }
+    });
+
+  })
+
+  app.post("/barber/signup", upload.array(), function(req, res)  {
+    let username = req.body.username;
+    let password = req.body.password;
+    Barber.findOne({ where : { username : username }}).then((dbpost) => {
+      console.log(dbpost)
+      if(dbpost === null) {
+        Barber.create({
+          username : username,
+          password : password
+        }).then(dbPost => {
+          //Sign up Success
+
+          res.send("Made");
+        });
+      } else {
+        //redirect with username exist
+        res.send("Existing username");
+      }
+    });
+
+  })
+
 
 };
