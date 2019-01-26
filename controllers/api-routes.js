@@ -61,6 +61,28 @@ module.exports = function (app) {
 
   });
 
+  app.post("/appointment/new", function (req, res) {
+
+    var appointment = req.body
+
+    Appointment.create({
+      accepted: appointment.accepted,
+      comments: appointment.comments,
+      customer_id: appointment.customer_id,
+      barber_id: appointment.barber_id,
+      time: appointment.time,
+      location: appointment.location,
+      cost: appointment.cost,
+      service_1: appointment.service_1,
+      service_2: appointment.service_2,
+      service_3: appointment.service_3,
+      paid: appointment.paid,
+      completed: appointment.completed
+          
+    });
+    res.status(204).end();
+  });
+
   app.post("/login", upload.array(), function(req, res) {
     console.log(req.body);
     res.send(200);

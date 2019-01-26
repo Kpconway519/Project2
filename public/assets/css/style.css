@@ -44,8 +44,8 @@ nav {
 }
   
   /* Style each tab content individually */ 
-#Client {background-color:red;}
-#Barber {background-color:blue;}
+#Client {background-color: #af1d1d;}
+#Barber {background-color:#163d75;}
 
   /* End Styling for first page */
 

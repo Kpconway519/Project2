@@ -18,77 +18,200 @@
                 <td>{{description}}</td>
                 <td>{{price}}</td>
                 <td>{{duration}}</td>
-                {{!-- for the add services button, I think the bootstrap classes are messing up the function. Not sure how to get around that for now. --}}
-                <td><button data-id="{{id}}" class="addServ" type="button" class="btn btn-primary" >Add</button></td>
+                {{!-- for the add services button, I think the bootstrap classes are messing up the function. Not sure
+                how to get around that for now. --}}
+                <td><button data-id="{{id}}" data-cost="{{price}}" data-duration="{{duration}}" class="addServ" type="button" class="btn btn-primary">Add</button></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
-    <!--End of Table-->
+<!--End of Table-->
 <!--Start of Side Nav-->
 <div id="mySidenav" class="sidenav">
     <a href="/" id="home">Back to Home</a>
     <a href="/barber" id="barberPage">Go To Barbers</a>
     <a href="#" id="social">Social Media</a>
 </div>
-    <!--End of Side Nav-->
+<!--End of Side Nav-->
 
 <div class="container">
-<a href="/barber">
-<button type="button" class="btn btn-primary btn-lg btn-block" id="goToBarber" href="/barber">Search Barbers</button>
-</a>
+    <button type="button" class="btn btn-primary btn-lg btn-block" id="goToBarber">Confirm Service and Select a Barber</button>
 </div>
 
 <!--Search script-->
 <script>
-        $(document).ready(function(){
-          $("#input").on("keyup", function() {
+    $(document).ready(function () {
+        $("#input").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#table tr").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            $("#table tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
-          });
         });
+    });
 </script>
 
 <script>
-    var servArray = []
+    let servArray = [];
+    let globalCostArray = [];
+    let globalDurationArray = [];
+    let totalDuration = 0;
+    let totalCost = 0;
+
 
     //function that affects the add buttons to add them to the array.
-    $(".addServ").on("click", function(event) {
+    $(".addServ").on("click", function (event) {
         event.preventDefault()
-    if (servArray.length < 3) {
-        var servID = $(this).data("id")
-        servArray.push(servID)
+        if (servArray.length < 3) {
+            var servID = $(this).data("id")
+            servArray.push(servID)
 
-        console.log(servArray)
-    }else{
-        alert("You may only add up to 3 services!")
-    }
+            var servCost = $(this).data("cost");
+            globalCostArray.push(servCost);
+            var servDuration = $(this).data("duration");
+            globalDurationArray.push(servDuration);
+
+            console.log(servArray)
+            console.log(globalCostArray)
+            console.log(globalDurationArray)
+        } else {
+            alert("You may only add up to 3 services!")
+        };
     })
 
+
+
+    //AUSTIN: can you make a system to dynamically show the servArray on the screen so the user knows what they've chosen? Or like make the row red if they selected that one?
+
+
+
+
+
+
+
     //function which acts when you click the submit button at the bottom of the page.
+
+
+
+
+    $("#goToBarber").on("click", function (event) {
+        event.preventDefault();
+
+        let makeAppointment = function (appObj) {
+            $.post("/appointment/new", appObj)
+                .then(function (data) {
+                    console.log(data);
+                    alert("Adding new appointment");
+                });
+        }
+
+
+//* Comments from the comment blank will be put into the “comments” section
+//* Cost gets calculated on this page—just add up the total cost of the services selected.
+//* Duration, like price, just adds up all the durations and puts it as an integer into the appointments table. 
+
+let calculateCost = function() {
+    //take the cost and just add it up depending on how many items are in the servArray
+    for (i = 0; i < globalCostArray.length; i++) {
+        //to calculate the cost, I need to take it from the page.
+        totalCost += globalCostArray[i];
+    };
+};
+
+let calculateDuration = function() {
+    //take the cost and just add it up depending on how many items are in the servArray
+    for (i = 0; i < globalDurationArray.length; i++) {
+        totalDuration += globalDurationArray[i];
+    };
+};
+
+
+
+        let pushServicesToDb = function () {
+
+            if (servArray.length === 0) {
+                alert("you must select at least one service")
+            } else {
+                //make a new appointment, starting with the services selected from the servArray
+
+                if (servArray.length === 1) {
+                    calculateCost();
+                    calculateDuration();
+                    addServicesObject = {
+                            accepted: false,
+                            comments: "leaving comments like this for now",
+                            customer_id: 1 /*change this to the correct value later*/,
+                            barber_id: 1 /*change this to the correct value later*/,
+                            time: totalDuration,
+                            location: "blank for now, later customer location",
+                            cost: totalCost,
+                            service_1: servArray[0],
+                            paid: false,
+                            completed: false
+                    }
+                    makeAppointment(addServicesObject)
+                } else if (servArray.length === 2) {
+                    calculateCost();
+                    calculateDuration();
+                    addServicesObject = {
+                        accepted: false,
+                        comments: "leaving comments like this for now",
+                        customer_id: 1 /*change this to the correct value later*/,
+                        barber_id: 1 /*change this to the correct value later*/,
+                        time: totalDuration,
+                        location: "blank for now, later customer location",
+                        cost: totalCost,
+                        service_1: servArray[0],
+                        service_2: servArray[1],
+                        paid: false,
+                        completed: false
+                    }
+                    makeAppointment(addServicesObject)
+                } else if (servArray.length === 3) {
+                    calculateCost();
+                    calculateDuration();
+                    addServicesObject = {
+                            accepted: false,
+                            comments: "leaving comments like this for now",
+                            customer_id: 1 /*change this to the correct value later*/,
+                            barber_id: 1 /*change this to the correct value later*/,
+                            time: totalDuration,
+                            location: "blank for now, later customer location",
+                            cost: totalCost,
+                            service_1: servArray[0],
+                            service_2: servArray[1],
+                            service_3: servArray[2],
+                            paid: false,
+                            completed: false
+                    }
+                    makeAppointment(addServicesObject)
+                }
+
+            };
+        }
+        //then go to the next page when that is done
+
+        pushServicesToDb()
+
+        //* The Id for the appointment row will be stored in local storage.
+
+    })
 </script>
-{{!-- 
+{{!--
 
-                                Make the Order page work. 
+Make the Order page work.
 
-Click on up to 3 services. The services you click will be added to a new appointment row. 
+Click on up to 3 services. The services you click will be added to a new appointment row.
 
 
-                This all gets wrapped in an onclick function for the button at the bottom of the page {
+This all gets wrapped in an onclick function for the button at the bottom of the page {
 
-* The Id for the appointment row will be stored in local storage.
 
-        make an object to send to the route to make a new appointment. {
+make an object to send to the route to make a new appointment. {
 
 * customer id is set as one for the appointment
-* Comments from the comment blank will be put into the “comments” section
-* Cost gets calculated on this page—just add up the total cost of the services selected.
-* Duration, like price, just adds up all the durations and puts it as an integer into the appointments     table. 
-        } //end of the object that gets sent to the route
-        
+} //end of the object that gets sent to the route
+
 }
 
 
@@ -96,11 +219,11 @@ Click on up to 3 services. The services you click will be added to a new appoint
 
 
 
-                                NOTES ON HOW TO DO STUFF:
+NOTES ON HOW TO DO STUFF:
 
 There should be a blank for comments at the bottom,
 
-Accepted is going to start out blank. I’ll figure out how to do this later. 
+Accepted is going to start out blank. I’ll figure out how to do this later.
 
 Barber_id is gonna get set on the next page when the user selects a barber.
 
@@ -113,4 +236,4 @@ Paid is gonna be blank for now until we figure out some kind of payment flow
 Completed is going to be blank, that is something which can be put in the Barber’s homepage later on.
 
 DURATION AND PRICE ARE IN WHOLE NUMBERS. UNITS ARE MINUTES AND DOLLARS
- --}}
+--}}
