@@ -159,7 +159,11 @@ nav {
     background-color: white;
     padding: 20px;
     text-align: center;
+    width: 800px;
+}
 
+#countDown {
+    color: #af1d1d;
 }
 
     /* End styling for confirm page */
