@@ -76,6 +76,15 @@ function authenticate(req, res, next) {
                 res.render("appointment.handlebars")
             })
 
+            //                  LOGIN PAGE
+            router.get("/customer/login", function(req, res) {
+                res.render("login.handlebars", { "type" : "customer" })
+            })
+
+            router.get("barber/login", function(req, res) {
+                res.render("login.handlebars", { "type" : "barber"})
+            })
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                              END OF ORDER FLOW                                               //
 //////////////////////////////////////////////////////////////////////////////////////////////////
