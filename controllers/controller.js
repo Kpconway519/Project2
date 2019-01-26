@@ -6,6 +6,25 @@ var Review = require("../models/reviews.js");
 var Service = require("../models/services.js")
 var router = express.Router();
 
+//Middleware
+// router.use(function (req, res, next) {
+//     console.log("here");
+//     if (!req.authenticated) {
+//         res.redirect('/login');
+//     } else {
+//         next();
+//     }   
+// })
+//middleware
+function authenticate(req, res, next) {
+    // console.log("here");
+    // if (req.authenticated) {
+    //     res.redirect('/login');
+    // } else {
+    //     next();
+    // }  
+    next();
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                              //
@@ -26,8 +45,7 @@ var router = express.Router();
 
 
             //                  ORDER PAGE
-            router.get("/order", function(req, res) {
-
+            router.get("/order", authenticate, function(req, res) {
                 Service.findAll({})
                 .then(function(data) {
                     let ordObject = {
@@ -37,7 +55,7 @@ var router = express.Router();
                 });
             });
             //                  BARBER PAGE
-            router.get("/barber", function(req, res) {
+            router.get("/barber", authenticate, function(req, res) {
                                 //this is gonna be a dynamic thing which adds in all the barbers from the database
 
                 // Get this function right///////////////////////
@@ -50,11 +68,11 @@ var router = express.Router();
                 });
             })
             //                  CONFIRMATION SCREEN
-            router.get("/confirm", function(req, res) {
+            router.get("/confirm", authenticate, function(req, res) {
                 res.render("confirm.handlebars")
             })
 
-            router.get("/appointment", function(req, res) {
+            router.get("/appointment", authenticate, function(req, res) {
                 res.render("appointment.handlebars")
             })
 
@@ -68,11 +86,11 @@ var router = express.Router();
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-            router.get("/about", function(req, res) {
+            router.get("/about", authenticate, function(req, res) {
                 res.render("about.handlebars")
             })
 
-            router.get("/allbarbers", function(req, res) {
+            router.get("/allbarbers", authenticate, function(req, res) {
                 //this is gonna be a dynamic thing which adds in all the barbers from the database
 
                 // Get this function right///////////////////////
@@ -85,7 +103,7 @@ var router = express.Router();
                 });
             })
 
-            router.get("/allreviews", function(req, res) {
+            router.get("/allreviews", authenticate, function(req, res) {
                 //this is gonna be a dynamic thing which adds in all the reviews from the database
                 res.render("allreviews.handlebars" /*, {  INSERT HANDLEBARS STUFF HERE  } */)
             })
@@ -99,7 +117,7 @@ var router = express.Router();
 //                                   ADMIN PAGE                                                 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-            router.get("/admin", function(req, res) {
+            router.get("/admin", authenticate, function(req, res) {
                 res.render("admin.handlebars")
             })
 
