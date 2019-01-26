@@ -10,12 +10,13 @@ nav {
  
 /* Styling for start page */
 .col {
-    padding: 40px
+    padding: 60px
 }
 
 #confirm {
-	background-color: #ffffff;
-	color: #333333;
+	background-color: #cccccc;
+    color: #333333;
+    font-size: 20PX;
 }
   /* Style the tab buttons */
 .tablink {
@@ -26,26 +27,30 @@ nav {
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
-    font-size: 17px;
+    margin: 20px 0;
+    font-size: 30px;
     width: 50%;
+
+   
 }
   
   /* Change background color of buttons on hover */
 .tablink:hover {
-    background-color:#333333;
+    background-color:#cccccc;
+    color: #333333;
 }
   
   /* Set default styles for tab content */
 .tabcontent {
     color: #ffffff;
     display: none;
-    padding: 50px;
+    padding: 100px;
     text-align: center;
 }
   
   /* Style each tab content individually */ 
-#Client {background-color:#af1d1d;}
-#Barber {background-color: #163d75;}
+#Client {background-color:#333333;}
+#Barber {background-color:#333333;}
 
   /* End Styling for first page */
 
