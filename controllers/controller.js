@@ -17,13 +17,13 @@ var router = express.Router();
 // })
 //middleware
 function authenticate(req, res, next) {
-    // console.log("here");
-    // if (req.authenticated) {
-    //     res.redirect('/login');
-    // } else {
-    //     next();
-    // }  
-    next();
+//console.log("here");
+//if (req.authenticated) {
+//    res.redirect('/login');
+//} else {
+//    next();
+//}  
+  next();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,8 +101,6 @@ function authenticate(req, res, next) {
 
             router.get("/allbarbers", authenticate, function(req, res) {
                 //this is gonna be a dynamic thing which adds in all the barbers from the database
-
-                // Get this function right///////////////////////
                 Barber.findAll({})
                 .then(function(data) {
                     let barbObject = {
@@ -145,6 +143,16 @@ function authenticate(req, res, next) {
 //                                      END OF ROUTES                                           //
 //                                                                                              //
 //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+router.get("/devlogin", authenticate, function(req, res) {
+    res.render("devlogin.handlebars")
+})
+
+
+
+
 
 
 

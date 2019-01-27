@@ -4,9 +4,9 @@ var sequelize = require("../config/connection.js");
 var Customer = sequelize.define("customers", {
   first_name: Sequelize.STRING,
   last_name: Sequelize.STRING,
-  username : Sequelize.STRING,
-  password : Sequelize.STRING,
-  session_id : Sequelize.STRING,
+  username: Sequelize.STRING,
+  password: Sequelize.STRING,
+  session_id: Sequelize.STRING,
   location: Sequelize.STRING,
   gender: Sequelize.STRING,
   ethnicity: Sequelize.STRING,

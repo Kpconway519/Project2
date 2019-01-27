@@ -5,9 +5,12 @@ var sequelize = require("../config/connection.js");
 var Appointments = sequelize.define("appts", {
   accepted: Sequelize.BOOLEAN,
   comments: Sequelize.STRING,
+  // CHRIS, I'M PUTTING THE SESSION HERE
+  session: Sequelize.STRING,
   customer_id: Sequelize.INTEGER,
   barber_id: Sequelize.INTEGER,
   time: Sequelize.STRING,
+  duration: Sequelize.INTEGER,
   location: Sequelize.STRING,
   cost: Sequelize.INTEGER,
   service_1: Sequelize.INTEGER,

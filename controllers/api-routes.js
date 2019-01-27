@@ -40,9 +40,17 @@ module.exports = function (app) {
     var customer = req.body
 
     Customer.create({
-      first_name: customer.firstName,
-      last_name: customer.lastName,
-      location: customer.location
+      first_name: customer.first_name,
+      last_name: customer.last_name,
+      location: customer.location,
+      username: customer.username,
+      password: customer.password,
+      session_id: customer.session_id,
+      gender: customer.gender,
+      ethnicity: customer.ethnicity,
+      fav_1: customer.fav_1,
+      fav_2: customer.fav_2,
+      fav_3: customer.fav_3
     });
     res.status(204).end();
 
@@ -63,15 +71,16 @@ module.exports = function (app) {
   });
 
   app.post("/appointment/new", function (req, res) {
-    console.log('appointment function called')
     var appointment = req.body
 
     Appointment.create({
       accepted: appointment.accepted,
       comments: appointment.comments,
+      // CHRIS, I'M PUTTING THE SESSION ID HERE
+      session: appointment.session,
       customer_id: appointment.customer_id,
       barber_id: appointment.barber_id,
-      time: appointment.time,
+      duration: appointment.time,
       location: appointment.location,
       cost: appointment.cost,
       service_1: appointment.service_1,
@@ -79,85 +88,110 @@ module.exports = function (app) {
       service_3: appointment.service_3,
       paid: appointment.paid,
       completed: appointment.completed
-          
+
     });
     res.render("barber.handlebars")
-    res.status(204).end();
+
   });
 
-  app.post("/login", upload.array(), function(req, res) {
-    console.log(req.body);
-    res.send(200);})
-  
-  app.post("/customer/login", upload.array(), function(req, res) {
-    //check to see if login worked
-    Customer.findOne({ where : { username : req.body.username}}).then((dbPost) => {
-      if(dbPost.password === req.body.password) {
+  app.put("/appointment/barber", function (req, res) {
+    // THIS IS PART OF THE FUNCTION WHERE THE SESSION IS USED TO FIND THE CORRECT APPOINTMENT AND THE CORRECT BARBER IS THEN SET IN THAT APPOINTMENT ROW.
+      // console.log(req)
+    //find the appointment where session === the passed in session value and replace the column "barber" with the passed value.
+      Appointment.update(
+        {barber_id: req.body.barber},
+        {where: {session: req.body.session}}
+      ).then(function(rowsUpdated) {
+        res.render("appointment.handlebars")
+      })
 
-        console.log(req.sessionId);
-        req.session.authenticated = true;
-        res.send(req.session.id);
-      } else {
-        res.send("Failure");
-      }
-    });
-  });
+    // Appointment.find({where: { session: req.session} } ).on('success', function(appt) {
+    //   if (appt) {
+    //     appt.update({barber: req.barber}).success(function() {
+    //       res.render("appointment.handlebars")
 
-  app.post("/barber/login", upload.array(), function(req, res) {
-    //check to see if login worked
-    Barber.findOne({ where : { username : req.body.username}}).then((dbPost) => {
-      if(dbPost.password === req.body.password) {
-        req.session.authenticated = true;
-        res.send(req.session.id);
-      } else {
-        res.send("Failure");
-      }
-    });
-  });
-
-  app.post("/customer/signup", upload.array(), function(req, res)  {
-    let username = req.body.username;
-    let password = req.body.password;
-    Customer.findOne({ where : { username : username }}).then((dbpost) => {
-      console.log(dbpost)
-      if(dbpost === null) {
-        Customer.create({
-          username : username,
-          password : password
-        }).then(dbPost => {
-          //Sign up Success
-
-          res.send("Made");
-        });
-      } else {
-        //redirect with username exist
-        res.send("Existing username");
-      }
-    });
-
+    //     })
+    //   }
+    // })
   })
+    
+    
+    
+    
 
-  app.post("/barber/signup", upload.array(), function(req, res)  {
-    let username = req.body.username;
-    let password = req.body.password;
-    Barber.findOne({ where : { username : username }}).then((dbpost) => {
-      console.log(dbpost)
-      if(dbpost === null) {
-        Barber.create({
-          username : username,
-          password : password
-        }).then(dbPost => {
-          //Sign up Success
+    // app.post("/login", upload.array(), function (req, res) {
+    //   console.log(req.body);
+    //   res.send(200);
+    // })
 
-          res.send("Made");
-        });
-      } else {
-        //redirect with username exist
-        res.send("Existing username");
-      }
-    });
+    // app.post("/customer/login", upload.array(), function (req, res) {
+    //   //check to see if login worked
+    //   Customer.findOne({ where: { username: req.body.username } }).then((dbPost) => {
+    //     if (dbPost.password === req.body.password) {
 
-  })
+    //       console.log(req.sessionId);
+    //       req.session.authenticated = true;
+    //       res.send(req.session.id);
+    //     } else {
+    //       res.send("Failure");
+    //     }
+    //   });
+    // });
 
+    // app.post("/barber/login", upload.array(), function (req, res) {
+    //   //check to see if login worked
+    //   Barber.findOne({ where: { username: req.body.username } }).then((dbPost) => {
+    //     if (dbPost.password === req.body.password) {
+    //       req.session.authenticated = true;
+    //       res.send(req.session.id);
+    //     } else {
+    //       res.send("Failure");
+    //     }
+    //   });
+    // });
 
-};
+    // app.post("/customer/signup", upload.array(), function (req, res) {
+    //   let username = req.body.username;
+    //   let password = req.body.password;
+    //   Customer.findOne({ where: { username: username } }).then((dbpost) => {
+    //     console.log(dbpost)
+    //     if (dbpost === null) {
+    //       Customer.create({
+    //         username: username,
+    //         password: password
+    //       }).then(dbPost => {
+    //         //Sign up Success
+
+    //         res.send("Made");
+    //       });
+    //     } else {
+    //       //redirect with username exist
+    //       res.send("Existing username");
+    //     }
+    //   });
+
+    // })
+
+    // app.post("/barber/signup", upload.array(), function (req, res) {
+    //   let username = req.body.username;
+    //   let password = req.body.password;
+    //   Barber.findOne({ where: { username: username } }).then((dbpost) => {
+    //     console.log(dbpost)
+    //     if (dbpost === null) {
+    //       Barber.create({
+    //         username: username,
+    //         password: password
+    //       }).then(dbPost => {
+    //         //Sign up Success
+
+    //         res.send("Made");
+    //       });
+    //     } else {
+    //       //redirect with username exist
+    //       res.send("Existing username");
+    //     }
+    //   });
+
+    // })
+
+}; //end of module.exports
