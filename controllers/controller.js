@@ -67,12 +67,13 @@ function authenticate(req, res, next) {
                     res.render("barber.handlebars" , barbObject);
                 });
             })
+
+
             //                  CONFIRMATION SCREEN
             router.get("/confirm/:session", authenticate, function(req, res) {
-                
-                
                 Appointment.findAll({where: {session: req.params.session}})
                 .then(function(data) {
+                    console.log(data)
                     let completedAppt = {
                         appointment: data
                     };                    

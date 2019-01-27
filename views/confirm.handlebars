@@ -8,9 +8,15 @@
     </div>
     <br>
     <!--End of Checkmark Image-->
+{{#each appointment}}
     <h2>Your Appointment Has Been Made!</h2>
-    <h1>{{comments}}</h1> 
+    <h1>Your appointment is with barber with id {{barber_id}}</h1> 
+    <h1></h1> 
+    <h1>Session number is: {{session}}</h1> 
+    <h1>The time for your appointment is : {{time}}</h1> 
+    <h1>Your appointment will take about {{duration}} minutes</h1> 
     <br>
+{{/each}}
     <h3>Your Barber Will Arrive In About:</h3>
     <br>
     <!--Countdown timer will be added-->
