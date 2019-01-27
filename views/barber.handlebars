@@ -1,30 +1,33 @@
 <!--Barber Selections-->
 <div class="container">
-      <h2 style="color:white" >Choose a Barber You Like!</h2>
-      <br>
+      <h2 style="color:white" >Choose a Barber!</h2>
+       <br>
       <h5 style="color:white">Filter Barbers by Services</h5> 
       <!--Filter Buttons-->   
-      <div id="myBtnContainer">
+       <div id="myBtnContainer">
         <button class="btn active" onclick="filterSelection('all')"> Show all</button>
         <button class="btn" onclick="filterSelection('Haircut')"> Haircut (regular)</button>
         <button class="btn" onclick="filterSelection('Taper_Haircut_and_Lineup')"> Taper Haircut & Lineup</button>
         <button class="btn" onclick="filterSelection('Head_Lineup_Only')"> Head Lineup Only</button>
         <button class="btn" onclick="filterSelection('Head_Shave')"> Head Shave</button>
         <button class="btn" onclick="filterSelection('Beard_Linup')"> Beard Lineup</button>
-    </div>
+    </div> 
     <!--End of Filter Buttons-->
 
 <!--Barber Data-->
 <div class="container">
 {{#each barbers}}
       <div class="card filterDiv {{service}}" style="width: 18rem;">
-            <img class="card-img-top" src="https://hsto.org/getpro/habr/post_images/6ed/d94/57e/6edd9457ec4ef14fd413377a3cfb0fb4.png" alt="Card image cap">
+            <img class="card-img-top" src="https://api.adorable.io/avatars/500/{{first_name}}{{last_name}}@adorable.io.png" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{first_name}} {{last_name}}</h5>
               <p class="card-text">{{location}}</p>
             </div>
             <div class="card-body">
               <a href="#" class="card-link">Link to barber profile</a>
+            </div>
+            <div class="card-body">
+              <button href="#" id="selectBarber" data-name="{{first_name}} {{last_name}}" data-barber="{{id}}" class="btn card-link">Select this Barber!</button>
             </div>
           </div>
   {{/each}}
@@ -43,9 +46,9 @@
 
 <!--Confirm barber and set appointment button-->
 <div class="container">
-<a href="/appointment">
+{{!-- <a href="/appointment"> --}}
 <button type="button" class="btn btn-primary btn-lg btn-block" id="confirmBarber">Confirm Barber and Set Appointment</button>
-</a>
+{{!-- </a> --}}
 </div>
     <!--End of Confirm Barber Button-->
 
@@ -54,6 +57,10 @@
 
 <!--Filtering script from W3 Schools-->
 <script>
+              // Global Bariables
+        let selectedBarber = null;
+
+
         filterSelection("all")
         function filterSelection(c) {
           var x, i;
@@ -96,4 +103,42 @@
             this.className += " active";
           });
         }
+
+
+
+        //backend stuff below
+
+
+        //on click for selecting barber
+          $("#selectBarber").on("click", function(event) {
+            event.preventDefault()
+              //this function will select the current barber and set the id for that barber as a variable. nice and simple.
+              selectedBarber = $(this).data("barber");
+              alert($(this).data("name") + 'is your selected barber')
+              //FRONTEND need to add visual feedback for this selection.
+
+          });
+        //on click for submitting thing at the bottom.
+          $("#confirmBarber").on("click", function(event) {
+            event.preventDefault()
+              //take the selectedBarber variable and gently place it into the appointments row with the appropriate appointment.
+
+
+                        //This is the main function which does the heavy lifting for the click handler.
+              let addBarberToAppointment = function(cb) {
+                
+
+
+
+                cb();
+              }
+
+
+
+                        //This is the callback function which loads the next page after the main function is done.
+              addBarberToAppointment(function() {
+              location.href = "/appointment"
+
+              })
+          });
 </script>

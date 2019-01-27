@@ -225,6 +225,7 @@ let calculateDuration = function() {
         //then go to the next page when that is done
 
         pushServicesToDb(function() {
+            //put a callback function here which fires after the appointment is created, and then just loads the next page.
             if (servArray >= 1) {
 
             location.href = "/barber"
@@ -237,43 +238,6 @@ let calculateDuration = function() {
 
     })
 </script>
-{{!--
-
-Make the Order page work.
-
-Click on up to 3 services. The services you click will be added to a new appointment row.
 
 
-This all gets wrapped in an onclick function for the button at the bottom of the page {
-
-
-make an object to send to the route to make a new appointment. {
-
-* customer id is set as one for the appointment
-} //end of the object that gets sent to the route
-
-}
-
-
-
-
-
-
-NOTES ON HOW TO DO STUFF:
-
-There should be a blank for comments at the bottom,
-
-Accepted is going to start out blank. I’ll figure out how to do this later.
-
-Barber_id is gonna get set on the next page when the user selects a barber.
-
-Time gets set later on the appointments screen
-
-Location gets set later on the appointments screen.
-
-Paid is gonna be blank for now until we figure out some kind of payment flow
-
-Completed is going to be blank, that is something which can be put in the Barber’s homepage later on.
-
-DURATION AND PRICE ARE IN WHOLE NUMBERS. UNITS ARE MINUTES AND DOLLARS
---}}
+{{!-- <-- * There should be a blank for comments at the bottom,--> --}}
