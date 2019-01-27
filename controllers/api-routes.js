@@ -105,18 +105,20 @@ module.exports = function (app) {
         res.render("appointment.handlebars")
       })
 
-    // Appointment.find({where: { session: req.session} } ).on('success', function(appt) {
-    //   if (appt) {
-    //     appt.update({barber: req.barber}).success(function() {
-    //       res.render("appointment.handlebars")
-
-    //     })
-    //   }
-    // })
   })
     
     
-    
+  app.put("/appointment/time", function (req, res) {
+    // THIS IS PART OF THE FUNCTION WHERE THE SESSION IS USED TO FIND THE CORRECT APPOINTMENT AND THE CORRECT BARBER IS THEN SET IN THAT APPOINTMENT ROW.
+
+      Appointment.update(
+        {time: req.body.time},
+        {where: {session: req.body.session}}
+      ).then(function(rowsUpdated) {
+        res.render("confirm.handlebars")
+      })
+
+  })  
     
 
     // app.post("/login", upload.array(), function (req, res) {

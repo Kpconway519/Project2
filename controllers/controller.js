@@ -68,8 +68,16 @@ function authenticate(req, res, next) {
                 });
             })
             //                  CONFIRMATION SCREEN
-            router.get("/confirm", authenticate, function(req, res) {
-                res.render("confirm.handlebars")
+            router.get("/confirm/:session", authenticate, function(req, res) {
+                
+                
+                Appointment.findAll({where: {session: req.params.session}})
+                .then(function(data) {
+                    let completedAppt = {
+                        appointment: data
+                    };                    
+                    res.render("confirm.handlebars", completedAppt);
+                });
             })
 
             router.get("/appointment", authenticate, function(req, res) {
