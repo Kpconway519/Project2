@@ -17,13 +17,13 @@ var router = express.Router();
 // })
 //middleware
 function authenticate(req, res, next) {
-//console.log("here");
-//if (req.authenticated) {
-//    res.redirect('/login');
-//} else {
-//    next();
-//}  
-  next();
+console.log("here");
+if (!req.authenticated) {
+   res.redirect('/');
+} else {
+   next();
+}  
+//   next();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
