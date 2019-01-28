@@ -28,7 +28,7 @@
         <a href="#" class="card-link">Link to barber profile</a>
       </div>
       <div class="card-body">
-        <button href="#" class="selectBarber" data-name="{{first_name}} {{last_name}}" data-barber="{{id}}" class="btn card-link">Select
+        <button href="#" class="selectBarber" data-name="{{first_name}} {{last_name}}" data-barber="{{id}}" data-location="{{location}}S" class="btn card-link" >Select
           this Barber!</button>
       </div>
     </div>
@@ -46,6 +46,12 @@
   </div>
   <!--End of Side Nav-->
 
+<div id="overlay" onclick="off()">
+  <div id="overlayBarberName"></div>
+  <br>
+  <div id="overlayText">Close and Confirm Appointment</div>
+</div>
+
   <!--Confirm barber and set appointment button-->
   <div class="container">
     {{!-- <a href="/appointment"> --}}
@@ -62,6 +68,7 @@
   <script>
     // Global Bariables
     let selectedBarber = null;
+    let globalBarberArray = [];
 
 
     filterSelection("all")
@@ -113,15 +120,39 @@
 
 
     //on click for selecting barber
-    $(".selectBarber").on("click", function (event) {
+    $(".selectBarber").on("click",function (event) {
       event.preventDefault()
+      
+
       //this function will select the current barber and set the id for that barber as a variable. nice and simple.
-      selectedBarber = $(this).data("barber");
-      alert(selectedBarber)
-      alert('works')
+      // selectedBarber = $(this).data("barber");
+      // alert(selectedBarber);
+      // alert('works');
+
       //FRONTEND need to add visual feedback for this selection.
+      var barberName = $(this).data("name");
+      globalBarberArray.push(barberName);
+
+      var barberLocation =$(this).data("location");
+      globalBarberArray.push(barberLocation)
+            
+      //Overlays the Barber Name Chosen and location
+      function on() {
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("overlayBarberName").innerHTML= "Chosen Barber:" + "<br>" + barberName + "<br>" + barberLocation;
+      }
+
+      //console logs the chosen barber
+      console.log(globalBarberArray);
+      on();    
 
     });
+      //Closes overlay
+      function off() {
+      document.getElementById("overlay").style.display = "none";
+      }
+
+
     //on click for submitting thing at the bottom.
     $("#confirmBarber").on("click", function (event) {
       event.preventDefault()
