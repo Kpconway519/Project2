@@ -1,0 +1,19 @@
+<h1>All barbers go below, dynamically filled in from mysql</h1>
+
+{{!-- This works now, needs styling --}}
+
+ {{#each barbers}}
+    <div class="row">
+        <div class="card">
+            <h2>
+                {{first_name}}
+            </h2>
+            <h2>
+                {{last_name}}
+            </h2>
+            <h2>
+                {{location}}
+            </h2>
+        </div>
+    </div>
+  {{/each}}

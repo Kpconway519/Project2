@@ -1,5 +1,12 @@
 const dotenv = require("dotenv")
-var express = require("express");
+const express = require("express");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+
+
+
+require("dotenv").config();
 
 var PORT = process.env.PORT || 9001;
 
@@ -8,9 +15,19 @@ var app = express();
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
+
+
 // Parse application body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser())
+//Authentication
+app.use(session({
+  secret: 'MVOETOCONFIG',
+  resave: false,
+  saveUninitialized: false,
+  // store: sessionStore
+}))
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
@@ -20,6 +37,14 @@ app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
 var routes = require("./controllers/controller.js");
+
+//kevin conway's route
+var apiRoutes = require("./controllers/api-routes.js");
+
+//login middleware
+
+
+apiRoutes(app);
 
 app.use(routes);
 

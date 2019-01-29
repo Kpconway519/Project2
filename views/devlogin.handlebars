@@ -1,0 +1,59 @@
+{{!-- CHRIS: SETTING ALL TEXT TYPES TO "TEXT" FOR SIMPLICITY NOW, YOU CAN CHANGE THIS LATER --}}
+<div class="container">
+
+<form>
+  <input type="text" name="firstname" placeholder="firstname" id="firstname"> <br>
+  <input type="text" name="lastname" placeholder="lastname" id="lastname"> <br>
+  <input type="text" name="location" placeholder="location" id="location"> <br>
+  <input type="text" name="gender" placeholder="gender" id="gender"> <br>
+  <input type="text" name="ethnicity" placeholder="ethnicity" id="ethnicity"> <br>
+  <input type="text" name="username" placeholder="username" id="username"> <br>
+  <input type="text" name="password" placeholder="password" id="password"> <br>
+  <button id="makeUser">submit</button>
+</form>
+</div>
+
+<script>
+//make a function that takes the username and password and makes a new user. at the same time, generate a random number to identify the session. put that random number into the user db and save it in local storage. 
+
+
+//          CHRIS: THIS IS MY RANDO NUMBER GENERATOR. YOU CAN CHANGE THIS OVER TO SESSION ID LATER.
+    
+  $("#makeUser").on("click", function(event) {
+    event.preventDefault();
+  
+    let kevinsSessionId = Math.floor(Math.random() * 9999999999999999999);
+
+    localStorage.setItem('tempSessionId', kevinsSessionId);
+
+
+    var newCustomer = {
+      first_name: $("#firstname").val().trim(),
+      last_name: $("#lastname").val().trim(),
+      location: $("#location").val().trim(),
+      gender: $("#gender").val().trim(),
+      ethnicity: $("#ethnicity").val().trim(),
+      username: $("#username").val().trim(),
+      password: $("#password").val().trim(),
+      session_id: kevinsSessionId
+    };
+  
+    $.post("/customer/new", newCustomer)
+      .then(function(data) {
+        console.log(data);
+        alert("Adding new customer");
+      });
+  
+    // empty each input box by replacing the value with an empty string
+
+
+    $("#firstname").val("");
+    $("#lastname").val("");
+    $("#location").val("");
+    $("#gender").val("");
+    $("#ethnicity").val("");
+    $("#username").val("");
+    $("#password").val("");
+  });
+
+</script>

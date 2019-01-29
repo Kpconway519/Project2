@@ -1,0 +1,223 @@
+	/* Styling for main.handlebars*/
+body {
+    background-color: #333333
+}
+  
+nav {
+    background-color: #cccccc
+}
+    /* End Style for main.handlebars*/
+ 
+/* Styling for start page */
+.col {
+    padding: 60px
+}
+
+#confirm {
+	background-color: #cccccc;
+    color: #333333;
+    font-size: 20PX;
+}
+  /* Style the tab buttons */
+.tablink {
+    background-color:#333333;
+    color: #ffffff;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    margin: 20px 0;
+    font-size: 30px;
+    width: 50%;
+
+   
+}
+  
+  /* Change background color of buttons on hover */
+.tablink:hover {
+    background-color:#cccccc;
+    color: #333333;
+}
+  
+  /* Set default styles for tab content */
+.tabcontent {
+    color: #ffffff;
+    display: none;
+    padding: 100px;
+    text-align: center;
+}
+  
+  /* Style each tab content individually */ 
+#Client {background-color:#333333;}
+#Barber {background-color:#333333;}
+
+  /* End Styling for first page */
+
+/* Styling for the sidenav from W3 Schools */
+#mySidenav a {
+    position: absolute; /* Position them relative to the browser window */
+    left: -80px; /* Position them outside of the screen */
+    transition: 0.3s; /* Add transition on hover */
+    padding: 15px; /* 15px padding */
+    width: 100px; /* Set a specific width */
+    text-decoration: none; /* Remove underline */
+    font-size: 20px; /* Increase font size */
+    color: white; /* White text color */
+    border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+}
+  
+#mySidenav a:hover {
+    left: 0; /* On mouse-over, make the elements appear as they should */
+}
+  
+#home {
+    top: 60px;
+    background-color: #163d75;
+}
+  
+#barberPage {
+    top: 140px;
+    background-color: #ccc;
+}
+
+#servicesPage {
+    top: 140px;
+    background-color: #ccc;
+}  
+  
+#social {
+    top: 220px;
+    background-color:#af1d1d;
+}
+    /* End Styling for sidenav */
+
+/* Styling for services page */
+.table {
+    background-color: #ffffff;
+}
+    /* End Styling for services page */
+
+/* Styling for barber page */
+.list-group-item {
+    background-color: #af1d1d
+}
+
+
+.filterDiv {
+  float: left;
+  background-color: #ffffff;
+  color: #333333;
+  width: 100px;
+  line-height: 100px;
+  text-align: center;
+  margin: 2px;
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.container {
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+/* Style the buttons */
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #163d75;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color:#cccccc;
+}
+
+.btn.active {
+  background-color: #ccc;
+  color: #ffffff;
+}
+
+    /* End styling for barber page */
+
+/* Styling for order page */
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #cccccc; /* Black background color */
+    color: #333333; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+    /*End Styling for order page */
+
+/* Styling for Appointment Page */
+
+    /* End stylign for Appointment Page */
+
+/*Styling for confirm page */
+#checkImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+#confirmDiv {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:#ffffff;
+    padding: 20px;
+    text-align: center;
+    width: 800px;
+}
+
+#countDown {
+    color: #af1d1d;
+}
+
+    /* End styling for confirm page */

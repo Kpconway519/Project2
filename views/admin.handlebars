@@ -1,0 +1,243 @@
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Admin Page</h1>
+      <hr>
+    </div>
+    {{!-- links dont work yet --}}
+    <div class="row">
+
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-header">
+            Add a Barber
+          </div>
+          <div class="card-body">
+            <form action="" method="POST" role="form">
+
+              <div class="form-group">
+                <label for="">First Name</label>
+                <input type="text" class="form-control" id="barber_first_name" placeholder="">
+              </div>
+
+              <div class="form-group">
+                <label for="">Last Name</label>
+                <input type="text" class="form-control" id="barber_last_name" placeholder="">
+              </div>
+
+              <div class="form-group">
+                <label for="">Location</label>
+                <input type="text" class="form-control" id="barber_location" placeholder="">
+              </div>
+
+            </form>
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary btn-md" id="barber-add-btn">
+                <span class="fa fa-fire"></span> Add a Barber</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+{{!-- links don't work yet --}}
+        <div class="row">
+
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-header">
+            Add a Customer
+          </div>
+          <div class="card-body">
+            <form action="" method="POST" role="form">
+
+              <div class="form-group">
+                <label for="">First Name</label>
+                <input type="text" class="form-control" id="customer_first_name" placeholder="">
+              </div>
+
+              <div class="form-group">
+                <label for="">Last Name</label>
+                <input type="text" class="form-control" id="customer_last_name" placeholder="">
+              </div>
+
+              <div class="form-group">
+                <label for="">Location</label>
+                <input type="text" class="form-control" id="customer_location" placeholder="">
+              </div>
+
+            </form>
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary btn-md" id="customer-add-btn">
+                <span class="fa fa-fire"></span> Add a Customer</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <div class="row">
+
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-header">
+            Add a Service
+          </div>
+          <div class="card-body">
+            <form action="" method="POST" role="form">
+
+              <div class="form-group">
+                <label for="">service</label>
+                <input type="text" class="form-control" id="service_name" placeholder="">
+              </div>
+
+              <div class="form-group">
+                <label for="">description</label>
+                <input type="text" class="form-control" id="service_description" placeholder="">
+              </div>
+
+              <div class="form-group">
+                <label for="">price</label>
+                <input type="text" class="form-control" id="service_price" placeholder="price in whole dollars">
+              </div>
+
+              <div class="form-group">
+                <label for="">duration</label>
+                <input type="text" class="form-control" id="service_duration" placeholder="some things, like perms, will take longer">
+              </div>
+
+            </form>
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary btn-md" id="service-add-btn">
+                <span class="fa fa-fire"></span> Add a Service</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+
+  <!--Start of Side Nav-->
+<div id="mySidenav" class="sidenav">
+    <a href="/" id="home">Back to Home</a>
+    <a href="/order" id="servicesPage">Go To Services</a>
+    <a href="/barber" id="social">Go To Barbers</a>
+</div>
+    <!--End of Side Nav-->
+
+
+
+{{!-- <script src="../../public/assets/js/script.js"></script> --}}
+
+
+<script>
+
+                          //        Barber Button          //
+  
+  $("#barber-add-btn").on("click", function(event) {
+    event.preventDefault();
+  
+    var newBarber = {
+      firstName: $("#barber_first_name").val().trim(),
+      lastName: $("#barber_last_name").val().trim(),
+      location: $("#barber_location").val().trim(),
+    };
+  
+    $.post("/barber/new", newBarber)
+      .then(function(data) {
+        console.log(data);
+        alert("Adding new barber");
+      });
+  
+    // empty each input box by replacing the value with an empty string
+    $("#barber_first_name").val("");
+    $("#barber_last_name").val("");
+    $("#barber_location").val("");
+  
+  });
+////////////////////////////////////////////////////////////////////////////////
+
+                              //        Customer Button       //
+
+  $("#customer-add-btn").on("click", function(event) {
+    event.preventDefault();
+  
+    var newCustomer = {
+      firstName: $("#customer_first_name").val().trim(),
+      lastName: $("#customer_last_name").val().trim(),
+      location: $("#customer_location").val().trim(),
+    };
+  
+    $.post("/customer/new", newCustomer)
+      .then(function(data) {
+        console.log(data);
+        alert("Adding new customer");
+      });
+  
+    // empty each input box by replacing the value with an empty string
+    $("#customer_first_name").val("");
+    $("#customer_last_name").val("");
+    $("#customer_location").val("");
+  
+  });
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+                              //        Service Button        //
+
+  $("#service-add-btn").on("click", function(event) {
+    event.preventDefault();
+  
+    var newService = {
+      name: $("#service_name").val().trim(),
+      description: $("#service_description").val().trim(),
+      price: $("#service_price").val().trim(),
+      duration: $("#service_duration").val().trim()
+    };
+  
+    $.post("/service/new", newService)
+      .then(function(data) {
+        console.log(data);
+        alert("Adding new service");
+      });
+  
+    // empty each input box by replacing the value with an empty string
+    $("#service_name").val("");
+    $("#service_description").val("");
+    $("#service_price").val("");
+    $("#service_duration").val("");
+  
+  });
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+</script>
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+{{!-- Right now, just making this a loop that goes back to the beginning for dev purposes, later it could be a link to reviews which saves a session id or something, or it could take you to the timer screen that shows you when your barber is going to be on the way, kind of like the "your pizza is being made screen at dominos" --}}
+
+<!--Space to hold confirmation info-->
+<div class="container" id="confirmDiv">
+    <!--Checkmark Image-->
+    <div class="container">
+        <img src="https://www.freeiconspng.com/uploads/checkmark-png-28.png" id="checkImage" height="300px" width="300px">
+    </div>
+    <br>
+    <!--End of Checkmark Image-->
+{{#each appointment}}
+    <h2>Your Appointment Has Been Made!</h2>
+    <h1>Your appointment is with barber with id {{barber_id}}</h1> 
+    <h1></h1> 
+    <h1>Session number is: {{session}}</h1> 
+    <h1>The time for your appointment is : {{time}}</h1> 
+    <h1>Your appointment will take about {{duration}} minutes</h1> 
+    <br>
+{{/each}}
+    <h3>Your Barber Will Arrive In About:</h3>
+    <br>
+    <!--Countdown timer will be added-->
+    <h3 id="countDown"></h3>
+    <br>
+    <h4>Thank You For Booking With Barberoo</h4>
+    <!--End of Countdown timer with confirmation-->
+    <!--Back to home page button-->
+    <div class="container">
+        {{!-- <a href="/"> --}}
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="backHome">Back to the Home Page</button>
+        {{!-- </a>  --}}
+    </div>
+    <!--End of home page button Button-->
+</div>
+    <!--End of space to hold confirmation info-->
+
+
+<!--Countdown timer JS based of W3 Schools example-->
+<script>
+//Set's count down date
+var countDownDate = new Date ("Jan 27, 2019 12:00:00").getTime();
+
+//Updates the countdown every 1 sec 
+var x = setInterval(function() {
+    //Current time
+    var now = new Date().getTime();
+    //Difference between the countdown date and current time
+    var distance = countDownDate - now;
+    //Days, Hours, Minutes and Seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //Displaying in h3 id "countDown"
+    document.getElementById("countDown").innerHTML =    days + " Day(s) " + 
+                                                        hours + " Hour(s) " + 
+                                                        minutes + " Minute(s) " + 
+                                                        seconds + " Second(s) ";
+    //Countdown has finished "Your Barber has Arrived"
+    if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("countDown").innerHTML = "Your Barber Has Arrived";
+    }
+}, 1000);
+
+</script>
+    <!--End of Countdown timer js-->
+
