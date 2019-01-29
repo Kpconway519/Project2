@@ -5,7 +5,7 @@
       <div id="Client" class="tabcontent">
         <h1><strong>WELCOME TO BARBEROO</strong></h1>
         <h3></h3>
-        <a href="/order">
+        <a href="customer/login">
 
         <button class="btn btn-outline-light font-weight-bold" id="confirm" >Looking for a Haircut?</button>
         </a>
@@ -14,7 +14,9 @@
       <div id="Barber" class="tabcontent">
         <h1><strong>WELCOME TO BARBEROO</strong></h1> 
         <h3></h3>
-        <button class="btn btn-outline-light font-weight-bold" id="confirm">Looking for work?</button>
+        <a href="barber/login">
+          <button class="btn btn-outline-light font-weight-bold" id="confirm">Looking for work?</button>
+        </a>
       </div>
         
       <button class="tablink font-weight-bold" onclick="openCity('Client', this, '#af1d1d')" id="defaultOpen">Client</button>
@@ -42,6 +44,7 @@ function openCity(cityName, elmnt, color) {
 
   // Show the specific tab content
   document.getElementById(cityName).style.display = "block";
+  
 
   // Add the specific color to the button used to open the tab content
   elmnt.style.backgroundColor = color;

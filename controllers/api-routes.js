@@ -121,79 +121,78 @@ module.exports = function (app) {
   })  
     
 
-    // app.post("/login", upload.array(), function (req, res) {
-    //   console.log(req.body);
-    //   res.send(200);
-    // })
 
-    // app.post("/customer/login", upload.array(), function (req, res) {
-    //   //check to see if login worked
-    //   Customer.findOne({ where: { username: req.body.username } }).then((dbPost) => {
-    //     if (dbPost.password === req.body.password) {
+    app.post("/customer/login", upload.array(), function (req, res) {
+      //check to see if login worked
+      Customer.findOne({ where: { username: req.body.username } }).then((dbPost) => {
+        if (dbPost.password === req.body.password) {
 
-    //       console.log(req.sessionId);
-    //       req.session.authenticated = true;
-    //       res.send(req.session.id);
-    //     } else {
-    //       res.send("Failure");
-    //     }
-    //   });
-    // });
+          console.log(req.sessionId);
+          req.session.authenticated = true;
+          res.send(req.session.id);
+        } else {
+          res.send("Failure");
+        }
+      });
+    });
 
-    // app.post("/barber/login", upload.array(), function (req, res) {
-    //   //check to see if login worked
-    //   Barber.findOne({ where: { username: req.body.username } }).then((dbPost) => {
-    //     if (dbPost.password === req.body.password) {
-    //       req.session.authenticated = true;
-    //       res.send(req.session.id);
-    //     } else {
-    //       res.send("Failure");
-    //     }
-    //   });
-    // });
+    app.post("/barber/login", upload.array(), function (req, res) {
+      //check to see if login worked
+      Barber.findOne({ where: { username: req.body.username } }).then((dbPost) => {
+        if (dbPost.password === req.body.password) {
+          req.session.authenticated = true;
+          res.send(req.session.id);
+        } else {
+          res.send("Failure");
+        }
+      });
+    });
+    
+    //Correctly use sequelize to force only one to exist and catch that error instead of findone first
+    //Also don't forget to grab and store all information that is needed
+    app.post("/customer/signup", upload.array(), function (req, res) {
+      let username = req.body.username;
+      let password = req.body.password;
+      Customer.findOne({ where: { username: username } }).then((dbpost) => {
+        console.log(dbpost)
+        if (dbpost === null) {
+          Customer.create({
+            username: username,
+            password: password
+          }).then(dbPost => {
+            //Sign up Success
 
-    // app.post("/customer/signup", upload.array(), function (req, res) {
-    //   let username = req.body.username;
-    //   let password = req.body.password;
-    //   Customer.findOne({ where: { username: username } }).then((dbpost) => {
-    //     console.log(dbpost)
-    //     if (dbpost === null) {
-    //       Customer.create({
-    //         username: username,
-    //         password: password
-    //       }).then(dbPost => {
-    //         //Sign up Success
+            res.send("Made");
+          });
+        } else {
+          //redirect with username exist
+          res.send("Existing username");
+        }
+      });
 
-    //         res.send("Made");
-    //       });
-    //     } else {
-    //       //redirect with username exist
-    //       res.send("Existing username");
-    //     }
-    //   });
+    })
+    //Correctly use sequelize to force only one to exist and catch that error instead of findone first
+    //Also don't forget to grab and store all information that is needed
+    app.post("/barber/signup", upload.array(), function (req, res) {
+      let username = req.body.username;
+      let password = req.body.password;
+      Barber.findOne({ where: { username: username } }).then((dbpost) => {
+        console.log(dbpost)
+        if (dbpost === null) {
+          Barber.create({
+            username: username,
+            password: password
+          }).then(dbPost => {
+            //Sign up Success
 
-    // })
+            res.send("Made");
+          });
+        } else {
+          //redirect with username exist
+          res.send("Existing username");
+        }
+      });
 
-    // app.post("/barber/signup", upload.array(), function (req, res) {
-    //   let username = req.body.username;
-    //   let password = req.body.password;
-    //   Barber.findOne({ where: { username: username } }).then((dbpost) => {
-    //     console.log(dbpost)
-    //     if (dbpost === null) {
-    //       Barber.create({
-    //         username: username,
-    //         password: password
-    //       }).then(dbPost => {
-    //         //Sign up Success
-
-    //         res.send("Made");
-    //       });
-    //     } else {
-    //       //redirect with username exist
-    //       res.send("Existing username");
-    //     }
-    //   });
-
-    // })
+    })
 
 }; //end of module.exports
