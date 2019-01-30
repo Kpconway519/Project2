@@ -62,7 +62,7 @@ function authenticate(req, res, next) {
 
 
             //                  CONFIRMATION SCREEN
-            router.get("/confirm/", authenticate, function(req, res) {
+            router.get("/confirm", authenticate, function(req, res) {
                 Appointment.findAll({where: {session: req.session.id}})
                 .then(function(data) {
                     console.log(data)

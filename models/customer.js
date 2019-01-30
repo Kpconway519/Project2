@@ -1,7 +1,7 @@
-var Sequelize = require("sequelize");
-var sequelize = require("../config/connection.js");
+var Sequelize = require('sequelize')
+var sequelize = require('../config/connection.js')
 
-var Customer = sequelize.define("customers", {
+var Customer = sequelize.define('customers', {
   first_name: Sequelize.STRING,
   last_name: Sequelize.STRING,
   username: Sequelize.STRING,
@@ -13,10 +13,8 @@ var Customer = sequelize.define("customers", {
   fav_1: Sequelize.INTEGER,
   fav_2: Sequelize.INTEGER,
   fav_3: Sequelize.INTEGER
-});
+})
 
-Customer.sync();
+Customer.sync()
 
-module.exports = Customer;
-
-
+module.exports = Customer
