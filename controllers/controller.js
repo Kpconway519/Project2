@@ -133,7 +133,7 @@ if (!req.session.authenticated) {
 //                                   ADMIN PAGE                                                 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-            router.get("/admin", authenticate, function(req, res) {
+            router.get("/admin", function(req, res) {
                 res.render("admin.handlebars")
             })
 
