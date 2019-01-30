@@ -71,13 +71,13 @@ module.exports = function (app) {
   });
 
   app.post("/appointment/new", function (req, res) {
-    var appointment = req.body
-
+    console.log(req.session.id)
+    var appointment = req.body;
     Appointment.create({
       accepted: appointment.accepted,
       comments: appointment.comments,
       // CHRIS, I'M PUTTING THE SESSION ID HERE
-      session: appointment.session,
+      session: req.session.id,
       customer_id: appointment.customer_id,
       barber_id: appointment.barber_id,
       duration: appointment.time,
@@ -90,6 +90,7 @@ module.exports = function (app) {
       completed: appointment.completed
 
     });
+    
     res.render("barber.handlebars")
 
   });
@@ -98,9 +99,10 @@ module.exports = function (app) {
     // THIS IS PART OF THE FUNCTION WHERE THE SESSION IS USED TO FIND THE CORRECT APPOINTMENT AND THE CORRECT BARBER IS THEN SET IN THAT APPOINTMENT ROW.
       // console.log(req)
     //find the appointment where session === the passed in session value and replace the column "barber" with the passed value.
-      Appointment.update(
+
+    Appointment.update(
         {barber_id: req.body.barber},
-        {where: {session: req.body.session}}
+        {where: {session: req.session.id}}
       ).then(function(rowsUpdated) {
         res.render("appointment.handlebars")
       })
@@ -113,7 +115,7 @@ module.exports = function (app) {
 
       Appointment.update(
         {time: req.body.time},
-        {where: {session: req.body.session}}
+        {where: {session: req.session.id}}
       ).then(function(rowsUpdated) {
         res.render("confirm.handlebars")
       })
@@ -147,7 +149,7 @@ module.exports = function (app) {
         }
       });
     });
-    
+
     //Correctly use sequelize to force only one to exist and catch that error instead of findone first
     //Also don't forget to grab and store all information that is needed
     app.post("/customer/signup", upload.array(), function (req, res) {
