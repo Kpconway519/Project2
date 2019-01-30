@@ -6,25 +6,17 @@ var Review = require("../models/reviews.js");
 var Service = require("../models/services.js")
 var router = express.Router();
 
-//Middleware
-// router.use(function (req, res, next) {
-//     console.log("here");
-//     if (!req.authenticated) {
-//         res.redirect('/login');
-//     } else {
-//         next();
-//     }   
-// })
 //middleware
 function authenticate(req, res, next) {
     console.log(req.cookie)
-if (!req.session.authenticated) {
-   res.redirect('/');
-} else {
-   next();
-}  
-//   next();
-}
+    //uncomment lines 13-17 and comment lines 18 for login to work
+    // if (!req.session.authenticated) {
+    // res.redirect('/');
+    // } else {
+    // next();
+    // }  
+      next();
+    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                              //
@@ -70,8 +62,8 @@ if (!req.session.authenticated) {
 
 
             //                  CONFIRMATION SCREEN
-            router.get("/confirm/:session", authenticate, function(req, res) {
-                Appointment.findAll({where: {session: req.params.session}})
+            router.get("/confirm/", authenticate, function(req, res) {
+                Appointment.findAll({where: {session: req.session.id}})
                 .then(function(data) {
                     console.log(data)
                     let completedAppt = {

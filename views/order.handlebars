@@ -19,7 +19,7 @@
                 <td id = "price">       {{price}}</td>
                 <td id = "duration">    {{duration}}</td>
                 {{!-- for the add services button, I think the bootstrap classes are messing up the function. Not sure how to get around that for now. --}}
-                <td><button data-id="{{id}}" data-cost="{{price}}" data-duration="{{duration}}" class="addServ" type="button" class="btn btn-primary" >Add</button></td>
+                <td id = "addButton"><button data-id="{{id}}" data-name="{{name}}" data-cost="{{price}}" data-duration="{{duration}}" class="addServ" type="button" class="btn btn-primary" >Add</button></td>
             </tr>
             {{/each}}
         </tbody>
@@ -80,6 +80,7 @@
     let servArray = [];
     let globalCostArray = [];
     let globalDurationArray = [];
+    let globalNameArray = [];
     let totalDuration = 0;
     let totalCost = 0;
 
@@ -95,13 +96,15 @@
             globalCostArray.push(servCost);
             var servDuration = $(this).data("duration");
             globalDurationArray.push(servDuration);
+            var servName = $(this).data("name");
+            globalNameArray.push(servName);
 
 
         var x = document.getElementById("snackbar");
         // Add the "show" class to DIV
         x.className = "show";
         //Display selected service
-        document.getElementById("snackbar").innerHTML ="Service has been added!";
+        document.getElementById("snackbar").innerHTML ="$" + servCost + " " + servName + " service has been added!";
         // After 3 seconds, remove the show class from DIV
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 
@@ -109,14 +112,16 @@
             console.log(servArray)
             console.log(globalCostArray)
             console.log(globalDurationArray)
+            console.log(globalNameArray)
+
         } else {
-            alert("You may only add up to 3 services!");
+            // alert("You may only add up to 3 services!");
 
             var x = document.getElementById("snackbar");
             // Add the "show" class to DIV
             x.className = "show";
             //Display selected service
-            document.getElementById("snackbar").innerHTML ="Service has been added, Cart is now full!";
+            document.getElementById("snackbar").innerHTML ="Cart is full with " + globalNameArray;
             // After 3 seconds, remove the show class from DIV
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 
