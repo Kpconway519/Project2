@@ -17,12 +17,13 @@ var router = express.Router();
 // })
 //middleware
 function authenticate(req, res, next) {
-// if (!req.authenticated) {
-//    res.redirect('/');
-// } else {
-//    next();
-// }  
-  next();
+    console.log(req.cookie)
+if (!req.session.authenticated) {
+   res.redirect('/');
+} else {
+   next();
+}  
+//   next();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
