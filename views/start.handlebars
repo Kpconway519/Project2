@@ -1,5 +1,5 @@
 <!--Choosing Client or Barber-->
-<div class ="col">
+<div class="col">
   <div class="row">
     <div class="container">
       <div id="Client" class="tabcontent">
@@ -7,58 +7,25 @@
         <h3></h3>
         <a href="customer/login">
 
-        <button class="btn btn-outline-light font-weight-bold" id="confirm" >Looking for a Haircut?</button>
+          <button class="btn btn-outline-light font-weight-bold" id="confirm">Looking for a Haircut?</button>
         </a>
       </div>
-        
+
       <div id="Barber" class="tabcontent">
-        <h1><strong>WELCOME TO BARBEROO</strong></h1> 
+        <h1><strong>WELCOME TO BARBEROO</strong></h1>
         <h3></h3>
         <a href="barber/login">
           <button class="btn btn-outline-light font-weight-bold" id="confirm">Looking for work?</button>
         </a>
       </div>
-        
+
       <button class="tablink font-weight-bold" onclick="openCity('Client', this, '#af1d1d')" id="defaultOpen">Client</button>
       <button class="tablink font-weight-bold" onclick="openCity('Barber', this, '#163d75')">Barber</button>
-      </div>
     </div>
   </div>
-  <!--End of Choosing-->
+</div>
+<!--End of Choosing-->
 
 <!--Script from W3 schools-->
-<script>
-function openCity(cityName, elmnt, color) {
-  // Hide all elements with class="tabcontent" by default */
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Remove the background color of all tablinks/buttons
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].style.backgroundColor = "";
-  }
-
-  // Show the specific tab content
-  document.getElementById(cityName).style.display = "block";
-  
-
-  // Add the specific color to the button used to open the tab content
-  elmnt.style.backgroundColor = color;
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-
-
-
-
-
-    let kevinsSessionId = Math.floor(Math.random() * 9999999999999999999);
-
-    localStorage.setItem('tempSessionId', kevinsSessionId);
-
+<script src="/public/assets/js/start.js">
 </script>
