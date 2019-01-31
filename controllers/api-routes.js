@@ -16,6 +16,9 @@ var Service = require("../models/services.js");
 const multer = require('multer');
 const upload = multer();
 
+//bcrypt
+const bcrypt = require('bcrypt');
+
 // Routes
 // =============================================================
 module.exports = function (app) {
@@ -127,26 +130,35 @@ module.exports = function (app) {
   app.post("/customer/login", upload.array(), function (req, res) {
     //check to see if login worked
     Customer.findOne({ where: { username: req.body.username } }).then((dbPost) => {
-      if (dbPost.password === req.body.password) {
-
-        console.log(req.sessionId);
-        req.session.authenticated = true;
-        res.send(req.session.id);
-      } else {
-        res.redie;
-      }
+      bcrypt.compare(req.body.password, dbPost.password, function(err, loggedIn) {
+        if(loggedIn) {
+          console.log(req.sessionId);
+          req.session.authenticated = true;
+          res.redirect("/order"); 
+         // Passwords match
+        } else {
+         // Passwords don't match
+         res.send("Failure");
+        } 
+      });
     });
   });
 
   app.post("/barber/login", upload.array(), function (req, res) {
     //check to see if login worked
     Barber.findOne({ where: { username: req.body.username } }).then((dbPost) => {
-      if (dbPost.password === req.body.password) {
-        req.session.authenticated = true;
-        res.send(req.session.id);
-      } else {
-        res.send("Failure");
-      }
+
+      bcrypt.compare(req.body.password, dbPost.password, function(err, loggedIn) {
+        if(loggedIn) {
+          console.log(req.sessionId);
+          req.session.authenticated = true;
+          res.send(req.session.id);
+         // Passwords match
+        } else {
+         // Passwords don't match
+         res.send("Failure");
+        } 
+      });
     });
   });
 
@@ -164,20 +176,25 @@ module.exports = function (app) {
     Customer.findOne({ where: { username: username } }).then((dbpost) => {
       console.log(dbpost)
       if (dbpost === null) {
-        Customer.create({
-          username: username,
-          password: password,
-          first_name: first_name,
-          last_name: last_name,
-          location: location,
-          gender: gender,
-          ethnicity: ethnicity
+        bcrypt.hash(password, 10, function(err, hash) {
+          // Store hash in database
+          Customer.create({
+            username: username,
+            password: hash,
+            first_name: first_name,
+            last_name: last_name,
+            location: location,
+            gender: gender,
+            ethnicity: ethnicity
+  
+          }).then(dbPost => {
+            //Sign up Success
+  
+            res.redirect("/order");
+          });
 
-        }).then(dbPost => {
-          //Sign up Success
-
-          res.send("Made");
         });
+
       } else {
         //redirect with username exist
         res.send("Existing username");
@@ -193,14 +210,17 @@ module.exports = function (app) {
     Barber.findOne({ where: { username: username } }).then((dbpost) => {
       console.log(dbpost)
       if (dbpost === null) {
-        Barber.create({
-          username: username,
-          password: password
-        }).then(dbPost => {
-          //Sign up Success
-
-          res.send("Made");
+        bcrypt.hash(password, 10, function(err, hash) {
+          Barber.create({
+            username: username,
+            password: hash
+          }).then(dbPost => {
+            //Sign up Success
+  
+            res.send("Made");
+          });
         });
+
       } else {
         //redirect with username exist
         res.send("Existing username");
