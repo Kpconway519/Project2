@@ -138,7 +138,8 @@ module.exports = function (app) {
          // Passwords match
         } else {
          // Passwords don't match
-         res.send("Failure");
+         res.render("login.handlebars", { "type" : "customer",
+                                          "error" : "Error processing request try again" })
         } 
       });
     });
@@ -156,7 +157,8 @@ module.exports = function (app) {
          // Passwords match
         } else {
          // Passwords don't match
-         res.send("Failure");
+         res.render("login.handlebars", { "type" : "barber",
+         "error" : "Error processing request try again" })
         } 
       });
     });
@@ -197,7 +199,8 @@ module.exports = function (app) {
 
       } else {
         //redirect with username exist
-        res.send("Existing username");
+        res.render("login.handlebars", { "type" : "customer",
+                    "error" : "Username already exist" })
       }
     });
 
@@ -217,14 +220,14 @@ module.exports = function (app) {
           }).then(dbPost => {
             //Sign up Success
   
-            res.send("Made");
+            res.redirect("/order");
           });
         });
 
       } else {
         //redirect with username exist
-        res.send("Existing username");
-      }
+        res.render("login.handlebars", { "type" : "barber",
+                    "error" : "Username already exist" })      }
     });
 
   })
