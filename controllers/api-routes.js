@@ -120,6 +120,7 @@ module.exports = function (app) {
       { time: req.body.time },
       { where: { session: req.session.id } }
     ).then(function (rowsUpdated) {
+
       res.render("confirm.handlebars")
     })
 
@@ -166,7 +167,7 @@ module.exports = function (app) {
            // Passwords don't match
            res.render("login.handlebars", { "type" : "barber",
            "error" : "Error processing request try again" })
-          } 
+          } //
         });
       } else {
         res.render("login.handlebars", { "type" : "barber",
