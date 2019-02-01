@@ -58,7 +58,7 @@ $(".selectBarber").on("click", function (event) {
 
 
   //this function will select the current barber and set the id for that barber as a variable. nice and simple.
-  // selectedBarber = $(this).data("barber");
+  selectedBarber = $(this).data("barber");
   // alert(selectedBarber);
   // alert('works');
 
