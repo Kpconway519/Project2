@@ -60,7 +60,6 @@ $("#goToBarber").on("click", function (event) {
         $.post("/appointment/new", appObj)
             .then(function (data) {
                 console.log(data);
-                alert("Adding new appointment");
             });
     }
 
