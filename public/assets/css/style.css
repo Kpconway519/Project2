@@ -190,6 +190,10 @@ background-color:#af1d1d;
 .table {
 background-color: #ffffff;
 }
+
+#added {
+    color: #af1d1d
+}
 /* End Styling for services page */
 
 /* Styling for barber page */
