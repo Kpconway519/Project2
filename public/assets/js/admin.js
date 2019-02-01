@@ -13,7 +13,7 @@ $("#barber-add-btn").on("click", function (event) {
   $.post("/barber/new", newBarber)
     .then(function (data) {
       console.log(data);
-      alert("Adding new barber");
+      console.log("Adding new barber");
     });
 
   // empty each input box by replacing the value with an empty string
@@ -38,7 +38,7 @@ $("#customer-add-btn").on("click", function (event) {
   $.post("/customer/new", newCustomer)
     .then(function (data) {
       console.log(data);
-      alert("Adding new customer");
+      console.log("Adding new customer");
     });
 
   // empty each input box by replacing the value with an empty string
@@ -66,7 +66,7 @@ $("#service-add-btn").on("click", function (event) {
   $.post("/service/new", newService)
     .then(function (data) {
       console.log(data);
-      alert("Adding new service");
+      console.log("Adding new service");
     });
 
   // empty each input box by replacing the value with an empty string
