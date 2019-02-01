@@ -17,7 +17,7 @@ const multer = require('multer');
 const upload = multer();
 
 //bcrypt
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // Routes
 // =============================================================
