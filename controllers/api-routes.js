@@ -129,38 +129,50 @@ module.exports = function (app) {
 
   app.post("/customer/login", upload.array(), function (req, res) {
     //check to see if login worked
+    console.log(req.body)
     Customer.findOne({ where: { username: req.body.username } }).then((dbPost) => {
-      bcrypt.compare(req.body.password, dbPost.password, function(err, loggedIn) {
-        if(loggedIn) {
-          console.log(req.sessionId);
-          req.session.authenticated = true;
-          res.redirect("/order"); 
-         // Passwords match
-        } else {
-         // Passwords don't match
-         res.render("login.handlebars", { "type" : "customer",
-                                          "error" : "Error processing request try again" })
-        } 
-      });
+      if(dbPost !== null) {
+        bcrypt.compare(req.body.password, dbPost.password, function(err, loggedIn) {
+          if(loggedIn) {
+            console.log(req.sessionId);
+            req.session.authenticated = true;
+            res.redirect("/order"); 
+           // Passwords match
+          } else {
+           // Passwords don't match
+           res.render("login.handlebars", { "type" : "customer",
+                                            "error" : "Error processing request try again" })
+          } 
+        });
+      } else {
+        res.render("login.handlebars", { "type" : "customer",
+        "error" : "Error processing request try again" })
+      }
+
     });
   });
 
   app.post("/barber/login", upload.array(), function (req, res) {
     //check to see if login worked
     Barber.findOne({ where: { username: req.body.username } }).then((dbPost) => {
+      if(dbPost !== null) {
+        bcrypt.compare(req.body.password, dbPost.password, function(err, loggedIn) {
+          if(loggedIn) {
+            console.log(req.sessionId);
+            req.session.authenticated = true;
+            res.send(req.session.id);
+           // Passwords match
+          } else {
+           // Passwords don't match
+           res.render("login.handlebars", { "type" : "barber",
+           "error" : "Error processing request try again" })
+          } 
+        });
+      } else {
+        res.render("login.handlebars", { "type" : "barber",
+        "error" : "Error processing request try again" })  
+      }
 
-      bcrypt.compare(req.body.password, dbPost.password, function(err, loggedIn) {
-        if(loggedIn) {
-          console.log(req.sessionId);
-          req.session.authenticated = true;
-          res.send(req.session.id);
-         // Passwords match
-        } else {
-         // Passwords don't match
-         res.render("login.handlebars", { "type" : "barber",
-         "error" : "Error processing request try again" })
-        } 
-      });
     });
   });
 
