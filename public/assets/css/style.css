@@ -192,7 +192,26 @@ background-color: #ffffff;
 }
 
 #added {
-    color: #af1d1d
+    color: #af1d1d;
+    text-align: center;
+    
+    
+}
+
+#buton {
+    background-color: #163d75;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    width: 30px;
+    border-radius: 5px;
+    position: relative;
+    left: 80px;   
+}
+
+#buton:hover{
+    background-color: #ccc;
 }
 /* End Styling for services page */
 
@@ -286,7 +305,20 @@ transform: translate(-50%,-50%);
     font-size: 60px;
     color: white
   }
+/* Select barber button */
+.selectBarber {
+    background-color: #163d75;
+    color: white;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    padding: 20px;
+    border-radius: 30px
+}
 
+.selectBarber:hover {
+    background-color: #ccc
+}
 /* End styling for barber page */
 
 /* Styling for order page */
