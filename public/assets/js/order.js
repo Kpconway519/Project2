@@ -21,14 +21,13 @@ $(".addServ").on("click", function (event) {
         var servName = $(this).data("name");
         globalNameArray.push(servName);
 
-
-        var x = document.getElementById("snackbar");
+        var snkBar = document.getElementById("snackbar");
         // Add the "show" class to DIV
-        x.className = "show";
+        snkBar.className = "show";
         //Display selected service
-        document.getElementById("snackbar").innerHTML = "$" + servCost + " " + servName + " service has been added!";
+        document.getElementById("snackbar").innerHTML = "$" + servCost + " " + servName + " has been added!";
         // After 3 seconds, remove the show class from DIV
-        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        setTimeout(function () { snkBar.className = snkBar.className.replace("show", ""); }, 3000);
 
 
         console.log(servArray)
@@ -39,13 +38,13 @@ $(".addServ").on("click", function (event) {
     } else {
         // alert("You may only add up to 3 services!");
 
-        var x = document.getElementById("snackbar");
+        var snkBar = document.getElementById("snackbar");
         // Add the "show" class to DIV
-        x.className = "show";
+        snkBar.className = "show";
         //Display selected service
         document.getElementById("snackbar").innerHTML = "Cart is full with " + globalNameArray;
         // After 3 seconds, remove the show class from DIV
-        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        setTimeout(function () { snkBar.className = snkBar.className.replace("show", ""); }, 3000);
 
 
     };
@@ -88,7 +87,13 @@ $("#goToBarber").on("click", function (event) {
     let pushServicesToDb = function (cb) {
 
         if (servArray.length === 0) {
-            alert("you must select at least one thing")
+            var snkBar = document.getElementById("snackbar");
+            // Add the "show" class to DIV
+            snkBar.className = "show";
+            //Display selected service
+            document.getElementById("snackbar").innerHTML = `You must select at least one service!`;
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () { snkBar.className = snkBar.className.replace("show", ""); }, 3000);
         } else {
             //make a new appointment, starting with the services selected from the servArray
 
@@ -164,7 +169,15 @@ $("#goToBarber").on("click", function (event) {
 
             location.href = "/barber"
         } else {
-            alert('you must select at least one service')
+
+            var snkBar = document.getElementById("snackbar");
+            // Add the "show" class to DIV
+            snkBar.className = "show";
+            //Display selected service
+            document.getElementById("snackbar").innerHTML = `You must select at least one service!`;
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () { snkBar.className = snkBar.className.replace("show", ""); }, 3000);
+    
         }
     })
 
