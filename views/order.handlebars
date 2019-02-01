@@ -18,8 +18,7 @@
                 <td id="description"> {{description}}</td>
                 <td id="price"> {{price}}</td>
                 <td id="duration"> {{duration}}</td>
-                {{!-- for the add services button, I think the bootstrap classes are messing up the function. Not sure
-                how to get around that for now. --}}
+                {{!-- for the add services button, bootstrap messes up the classes. going with default button appearance for now. --}}
                 <td id="addButton"><button data-id="{{id}}" data-name="{{name}}" data-cost="{{price}}" data-duration="{{duration}}"
                         class="addServ" type="button" class="btn btn-primary">Add</button></td>
             </tr>
@@ -29,9 +28,6 @@
 </div>
 <!--End of Table-->
 
-<!--Snackbar pop up confirming selection of service-->
-{{!-- <div id="snackbar"></div> --}}
-<!--End of snackbar pop up-->
 
 <!--Start of Side Nav-->
 <div id="mySidenav" class="sidenav">
@@ -82,4 +78,4 @@
 </script>
 
 
-{{!-- <-- * There should be a blank for comments at the bottom,--> --}}
+{{!-- <-- Blank for customer comments to be added later--> --}}

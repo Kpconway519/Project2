@@ -24,7 +24,12 @@ const bcrypt = require('bcryptjs');
 module.exports = function (app) {
   // Search for Specific Character (or all characters) then provides JSON
 
-  // If a user sends data to add a new character...
+
+
+                          //////////////////////
+                         // ADD a new barber //
+                        //////////////////////
+
   app.post("/barber/new", function (req, res) {
 
     var barber = req.body
@@ -37,6 +42,15 @@ module.exports = function (app) {
     res.status(204).end();
 
   });
+
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ////////////////////////
+                         // ADD a new customer //
+                        ////////////////////////
 
   app.post("/customer/new", function (req, res) {
 
@@ -59,6 +73,15 @@ module.exports = function (app) {
 
   });
 
+  //////////////////////
+ //       END        //
+//////////////////////
+
+
+                          ////////////////////////
+                         // POST a new service //
+                        ////////////////////////
+
   app.post("/service/new", function (req, res) {
 
     var service = req.body
@@ -73,13 +96,24 @@ module.exports = function (app) {
 
   });
 
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ////////////////////////////
+                         // POST a new appointment //
+                        ////////////////////////////
+
+
+
+
   app.post("/appointment/new", function (req, res) {
     console.log(req.session.id)
     var appointment = req.body;
     Appointment.create({
       accepted: appointment.accepted,
       comments: appointment.comments,
-      // CHRIS, I'M PUTTING THE SESSION ID HERE
       session: req.session.id,
       customer_id: appointment.customer_id,
       barber_id: appointment.barber_id,
@@ -98,6 +132,15 @@ module.exports = function (app) {
 
   });
 
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ////////////////////////////////////////////////////
+                         // UPDATE a new barber to the created appointment //
+                        ////////////////////////////////////////////////////
+
   app.put("/appointment/barber", function (req, res) {
     // THIS IS PART OF THE FUNCTION WHERE THE SESSION IS USED TO FIND THE CORRECT APPOINTMENT AND THE CORRECT BARBER IS THEN SET IN THAT APPOINTMENT ROW.
     // console.log(req)
@@ -112,6 +155,14 @@ module.exports = function (app) {
 
   })
 
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ///////////////////////////////////////////////////
+                         // UPDATE the appointment with the selected time //
+                        ///////////////////////////////////////////////////
 
   app.put("/appointment/time", function (req, res) {
     // THIS IS PART OF THE FUNCTION WHERE THE SESSION IS USED TO FIND THE CORRECT APPOINTMENT AND THE CORRECT BARBER IS THEN SET IN THAT APPOINTMENT ROW.
@@ -126,7 +177,14 @@ module.exports = function (app) {
 
   })
 
+  //////////////////////
+ //        END       //
+//////////////////////
 
+
+                          //////////////////////////////
+                         //     customer login       //
+                        //////////////////////////////
 
   app.post("/customer/login", upload.array(), function (req, res) {
     //check to see if login worked
@@ -153,6 +211,15 @@ module.exports = function (app) {
     });
   });
 
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ///////////////////////////////////////
+                         //            barber login           //
+                        ///////////////////////////////////////
+
   app.post("/barber/login", upload.array(), function (req, res) {
     //check to see if login worked
     Barber.findOne({ where: { username: req.body.username } }).then((dbPost) => {
@@ -176,6 +243,15 @@ module.exports = function (app) {
 
     });
   });
+
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ////////////////////////////////////////////////////
+                         //              customer signup                   //
+                        ////////////////////////////////////////////////////
 
   //Correctly use sequelize to force only one to exist and catch that error instead of findone first
   //Also don't forget to grab and store all information that is needed
@@ -218,6 +294,16 @@ module.exports = function (app) {
     });
 
   })
+
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ////////////////////////////////////////////////////
+                         //               barber signup                    //
+                        ////////////////////////////////////////////////////
+
   //Correctly use sequelize to force only one to exist and catch that error instead of findone first
   //Also don't forget to grab and store all information that is needed
   app.post("/barber/signup", upload.array(), function (req, res) {
@@ -244,5 +330,10 @@ module.exports = function (app) {
     });
 
   })
+
+  //////////////////////
+ //        END       //
+//////////////////////
+
 
 }; //end of module.exports

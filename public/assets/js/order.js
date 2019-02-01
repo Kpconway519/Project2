@@ -103,11 +103,9 @@ $("#goToBarber").on("click", function (event) {
                 addServicesObject = {
                     accepted: false,
                     comments: "leaving comments like this for now",
-                    // CHRIS, I'M PUTTING THE SESSION HERE
-
                     session: localStorage.getItem("tempSessionId"),
-                    customer_id: 1 /*change this to the correct value later*/,
-                    barber_id: 1 /*change this to the correct value later*/,
+                    customer_id: 1,
+                    barber_id: 1,
                     time: totalDuration,
                     location: "blank for now, later customer location",
                     cost: totalCost,
@@ -122,11 +120,9 @@ $("#goToBarber").on("click", function (event) {
                 addServicesObject = {
                     accepted: false,
                     comments: "leaving comments like this for now",
-                    // CHRIS, I'M PUTTING THE SESSION HERE
-
                     session: localStorage.getItem("tempSessionId"),
-                    customer_id: 1 /*change this to the correct value later*/,
-                    barber_id: 1 /*change this to the correct value later*/,
+                    customer_id: 1,
+                    barber_id: 1,
                     time: totalDuration,
                     location: "blank for now, later customer location",
                     cost: totalCost,
@@ -142,10 +138,9 @@ $("#goToBarber").on("click", function (event) {
                 addServicesObject = {
                     accepted: false,
                     comments: "leaving comments like this for now",
-                    // CHRIS, I'M PUTTING THE SESSION HERE
                     session: localStorage.getItem("tempSessionId"),
-                    customer_id: 1 /*change this to the correct value later*/,
-                    barber_id: 1 /*change this to the correct value later*/,
+                    customer_id: 1,
+                    barber_id: 1,
                     time: totalDuration,
                     location: "blank for now, later customer location",
                     cost: totalCost,

@@ -18,10 +18,10 @@ function authenticate(req, res, next) {
       next();
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                              //
-//                            HERE IS WHERE ALL THE ROUTES GO                                   //
-//                                                                                              //
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+   //                                                                                              //
+  //                            HERE IS WHERE ALL THE ROUTES GO                                   //
+ //                                                                                              //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
             //                  MAIN PAGE
@@ -29,12 +29,21 @@ function authenticate(req, res, next) {
             router.get("/", function(req, res) {
                 res.render("start.handlebars");
             });
-
-
+    
+    
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+ //                             ORDER FLOW                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////////////
-//                              ORDER FLOW                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
+            
+            //                  CUSTOMER LOGIN
+            router.get("/customer/login", function(req, res) {
+                res.render("login.handlebars", { "type" : "customer" })
+            })
+            
+            //                  BARBER LOGIN
+            router.get("/barber/login", function(req, res) {
+                res.render("login.handlebars", { "type" : "barber"})
+            })
 
             //                  ORDER PAGE
             router.get("/order", authenticate, function(req, res) {
@@ -46,11 +55,10 @@ function authenticate(req, res, next) {
                     res.render("order.handlebars", ordObject);
                 });
             });
+
             //                  BARBER PAGE
             router.get("/barber", authenticate, function(req, res) {
-                                //this is gonna be a dynamic thing which adds in all the barbers from the database
 
-                // Get this function right///////////////////////
                 Barber.findAll({})
                 .then(function(data) {
                     let barbObject = {
@@ -59,7 +67,6 @@ function authenticate(req, res, next) {
                     res.render("barber.handlebars" , barbObject);
                 });
             })
-
 
             //                  CONFIRMATION SCREEN
             router.get("/confirm", authenticate, function(req, res) {
@@ -73,33 +80,26 @@ function authenticate(req, res, next) {
                 });
             })
 
+            //                  APPOINTMENT SCREEN
             router.get("/appointment", authenticate, function(req, res) {
                 res.render("appointment.handlebars")
             })
 
-            //                  LOGIN PAGE
-            router.get("/customer/login", function(req, res) {
-                res.render("login.handlebars", { "type" : "customer" })
-            })
-
-            router.get("/barber/login", function(req, res) {
-                res.render("login.handlebars", { "type" : "barber"})
-            })
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//                              END OF ORDER FLOW                                               //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+ //                              END OF ORDER FLOW                                               //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//                              ABOUT PAGES FROM THE NAVBAR                                     //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+ //                              ABOUT PAGES FROM THE NAVBAR                                     //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+            //                   ABOUT PAGE
             router.get("/about", authenticate, function(req, res) {
                 res.render("about.handlebars")
             })
 
+            //                   ALLBARBERS PAGE
             router.get("/allbarbers", authenticate, function(req, res) {
                 //this is gonna be a dynamic thing which adds in all the barbers from the database
                 Barber.findAll({})
@@ -111,59 +111,38 @@ function authenticate(req, res, next) {
                 });
             })
 
+            //                   ALLREVIEWS PAGE
             router.get("/allreviews", authenticate, function(req, res) {
                 //this is gonna be a dynamic thing which adds in all the reviews from the database
                 res.render("allreviews.handlebars" /*, {  INSERT HANDLEBARS STUFF HERE  } */)
             })
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//                              END OF ABOUT PAGES                                              //
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//                                   ADMIN PAGE                                                 //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+ //                              END OF ABOUT PAGES                                              //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+ //                              ADMIN PAGES                                                     //
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //                   ADMIN PAGE
             router.get("/admin", function(req, res) {
                 res.render("admin.handlebars")
             })
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                              //
-//                                   END OF ADMIN PAGE                                          //
-//                                                                                              //
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                              //
-//                                      END OF ROUTES                                           //
-//                                                                                              //
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+   //                                                                                              //
+  //                              END OF ADMIN PAGE                                               //
+ //                                                                                              //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-router.get("/devlogin", authenticate, function(req, res) {
-    res.render("devlogin.handlebars")
-})
-
-
-
-
-
-
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+   //                                                                                              //
+  //                              END OF ROUTES                                                   //
+ //                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 module.exports = router;
 
-
-
-
-
-
-
-//ajsijlfdsaijlfadsl'fdsa
