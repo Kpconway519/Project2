@@ -19,7 +19,7 @@ $("#setTimeConfirm").on("click", function () {
       data: timeUpdate
     }).then(function (data) {
       console.log('works')
-      location.href = `/confirm/${localStorage.getItem("tempSessionId")}`
+      location.href = `/confirm`
     })
 
   } else {
