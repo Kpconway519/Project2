@@ -28,7 +28,7 @@ app.use(session({
   saveUninitialized: false,
   // store: sessionStore
 }))
-
+  
 // Set Handlebars.
 var exphbs = require("express-handlebars");
 
