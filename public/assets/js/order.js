@@ -88,7 +88,7 @@ $("#goToBarber").on("click", function (event) {
     let pushServicesToDb = function (cb) {
 
         if (servArray.length === 0) {
-            alert("you must select at least one service")
+            alert("you must select at least one thing")
         } else {
             //make a new appointment, starting with the services selected from the servArray
 
@@ -160,7 +160,7 @@ $("#goToBarber").on("click", function (event) {
 
     pushServicesToDb(function () {
         //put a callback function here which fires after the appointment is created, and then just loads the next page.
-        if (servArray >= 1) {
+        if (servArray.length >= 1) {
 
             location.href = "/barber"
         } else {
