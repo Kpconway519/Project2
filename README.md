@@ -9,9 +9,9 @@
 #                       |/             / /%%%%%%/ /        |                                 
 #                       |             / /%%%%%%/ /         |                                 
 #                       |            / /%%%%%%/ /          |
-
+#
 #                                     Barberoo!
-
+#
 #                       |           / /%%%%%%/ /           |                                 
 #                       |          / /%%%%%%/ /           /|                                 
 #                       |         / /%%%%%%/ /           / |                                 
@@ -45,9 +45,9 @@ We decided to do a project which could be developed into a useful service, while
 Not only does this app have the potential to be a legitimate service, but it also reinforced skills which can be easily applied across many different web development roles including order flow design, persistence via express sessions, and security through use of sequelize (reduces the risk of SQL injection) and encryption for passwords.
 
 # How it works
-                                                  //////////////////
-                                                 //  Order Flow  //
-                                                //////////////////
+                               //////////////////
+                              //  Order Flow  //
+                             //////////////////
 
 Step 0: Go to the /admin page and seed your database with the appropriate barbers and services for your users. 
 
