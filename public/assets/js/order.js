@@ -35,6 +35,10 @@ $(".addServ").on("click", function (event) {
         console.log(globalDurationArray)
         console.log(globalNameArray)
 
+        //Removed Add Button
+        console.log(this)
+        this.parentElement.innerHTML = "<div id='added'>Added</div>"
+
     } else {
         // alert("You may only add up to 3 services!");
 

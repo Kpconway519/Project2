@@ -50,11 +50,17 @@
   </div>
   <!--End of Side Nav-->
 
+<!--Overlay-->
   <div id="overlay" onclick="off()">
     <div id="overlayBarberName"></div>
     <br>
-    <div id="overlayText">Close and Confirm Appointment</div>
+    <a id="confirmBarber" href="/appointment">
+    <div id="overlayText" >Close and Confirm Appointment</div>
+    </a>
+    <!-- Button to close the overlay navigation -->
+    <a class="closebtn" onclick="closeNav()">&times;</a>
   </div>
+    <!--End of Overlay-->
 
   <!--Confirm barber and set appointment button-->
   <div class="container">

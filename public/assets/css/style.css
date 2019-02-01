@@ -190,6 +190,10 @@ background-color:#af1d1d;
 .table {
 background-color: #ffffff;
 }
+
+#added {
+    color: #af1d1d
+}
 /* End Styling for services page */
 
 /* Styling for barber page */
@@ -273,6 +277,15 @@ color: white;
 transform: translate(-50%,-50%);
 -ms-transform: translate(-50%,-50%);
 }
+
+/* Position the close button (top right corner) */
+#overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    color: white
+  }
 
 /* End styling for barber page */
 
