@@ -34,7 +34,7 @@
 * Austin Fortson--Frontend logic and design
 * Christopher Killen--Backend logic and security
 * Mohamed Naji--Graphic design and Theme
-* Wynston Saamoi--
+* Wynston Saamoi--Backend and Frontend
 
 
 #                    ///////////////////////////
