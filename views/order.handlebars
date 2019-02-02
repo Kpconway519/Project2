@@ -18,9 +18,10 @@
                 <td id="description"> {{description}}</td>
                 <td id="price"> {{price}}</td>
                 <td id="duration"> {{duration}}</td>
-                {{!-- for the add services button, bootstrap messes up the classes. going with default button appearance for now. --}}
-                <td id="addButton"><button data-id="{{id}}" data-name="{{name}}" data-cost="{{price}}" data-duration="{{duration}}"
-                        class="addServ" type="button" class="btn btn-primary">Add</button></td>
+                {{!-- for the add services button, I think the bootstrap classes are messing up the function. Not sure
+                how to get around that for now. --}}
+                <td id="addButton"><span id="buton" data-id="{{id}}" data-name="{{name}}" data-cost="{{price}}" data-duration="{{duration}}"
+                        class="addServ">Add</span></td>
             </tr>
             {{/each}}
         </tbody>
