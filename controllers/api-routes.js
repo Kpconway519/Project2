@@ -332,6 +332,11 @@ module.exports = function (app) {
 
   })
 
+  app.get("/api/signout", function(req, res) {
+    req.session.authenticated = false;
+    res.redirect("/");
+  })
+
   //////////////////////
  //        END       //
 //////////////////////

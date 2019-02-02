@@ -10,12 +10,12 @@ var router = express.Router();
 function authenticate(req, res, next) {
     console.log(req.cookie)
     //uncomment lines 13-17 and comment lines 18 for login to work
-    // if (!req.session.authenticated) {
-    // res.redirect('/');
-    // } else {
-    // next();
-    // }  
-      next();
+    if (!req.session.authenticated) {
+        res.redirect('/');
+    } else {
+        next();
+    }  
+    //   next();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,12 @@ function authenticate(req, res, next) {
             //                  MAIN PAGE
 
             router.get("/", function(req, res) {
-                res.render("start.handlebars");
+                if(req.authenticated) {
+                    res.render("start.handlebars" , { "session" : true });
+                } else {
+                    res.render("start.handlebars");
+                }
+                
             });
     
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +54,8 @@ function authenticate(req, res, next) {
                 Service.findAll({})
                 .then(function(data) {
                     let ordObject = {
-                        services: data
+                        services: data, 
+                        "session" : true
                     };                    
                     res.render("order.handlebars", ordObject);
                 });
@@ -61,7 +67,8 @@ function authenticate(req, res, next) {
                 Barber.findAll({})
                 .then(function(data) {
                     let barbObject = {
-                        barbers: data
+                        barbers: data, 
+                        "session" : true
                     };
                     res.render("barber.handlebars" , barbObject);
                 });
@@ -73,7 +80,8 @@ function authenticate(req, res, next) {
                 .then(function(data) {
                     console.log(data)
                     let completedAppt = {
-                        appointment: data
+                        appointment: data, 
+                        "session" : true
                     };                    
                     res.render("confirm.handlebars", completedAppt);
                 });
@@ -81,7 +89,7 @@ function authenticate(req, res, next) {
 
             //                  APPOINTMENT SCREEN
             router.get("/appointment", authenticate, function(req, res) {
-                res.render("appointment.handlebars")
+                res.render("appointment.handlebars" ,{ "session" : true })
             })
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
