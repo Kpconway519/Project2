@@ -3,9 +3,14 @@
 //
 let today = new Date();
 let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
-let selectYear = document.getElementById("year");
-let selectMonth = document.getElementById("month");
+let currentYear = 2019;
+let selectYear = 2019;
+let selectMonth = today.getMonth();
+const calendar = document.querySelector("#calendar-body");
+const currentDay = document.querySelector("#currentDay");
+currentDay.value = today.getDate();
+const time = document.querySelector("#apptTime");
+
 
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -14,19 +19,19 @@ showCalendar(currentMonth, currentYear);
 
 
 function next() {
-    currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+    currentYear = 2019;
     currentMonth = (currentMonth + 1) % 12;
     showCalendar(currentMonth, currentYear);
 }
 
 function previous() {
-    currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+    currentYear = 2019;
     currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
     showCalendar(currentMonth, currentYear);
 }
 
 function jump() {
-    currentYear = parseInt(selectYear.value);
+    currentYear =  2019;
     currentMonth = parseInt(selectMonth.value);
     showCalendar(currentMonth, currentYear);
 }
@@ -82,39 +87,50 @@ function showCalendar(month, year) {
     }
 
 }
+
+calendar.addEventListener("click", (event) => {
+    //find and delete current bg-info
+    let current = document.querySelector(".bg-info");
+    if(current !== null) {
+        current.className = "";
+    }
+    
+    
+    //assign new bg-indo
+    event.target.className += "bg-info";
+
+    //put new selected in hidden input in form
+    currentDay.value = event.target.textContent;
+
+})
+
 ///
 $("#setTimeConfirm").on("click", function () {
   event.preventDefault()
-  let selectedTime = $("#apptTime").val().trim();;
+  //build time object 
+  let appointmentTime = new Date();
+  console.log(time.value.substring(0, time.value.indexOf(":")))
+  appointmentTime.setDate(currentDay.value);
+  appointmentTime.setFullYear(2019);
+  appointmentTime.setHours(time.value.substring(0, time.value.indexOf(":")));
+  appointmentTime.setMinutes(time.value.substring(time.value.indexOf(":") + 1));
+  appointmentTime.setMonth(currentMonth);
 
 
-
-  if (selectedTime) {
-    let timeUpdate = {
-      session: `${localStorage.getItem("tempSessionId")}`,
-      time: selectedTime
+        let timeUpdate = {
+        session: `${localStorage.getItem("tempSessionId")}`,
+        time: appointmentTime
     };
-
+    console.log(timeUpdate)
     //$.put("appointment/barber", barbUpdate)
     $.ajax({
-      method: "PUT",
-      url: "/appointment/time",
-      data: timeUpdate
+        method: "PUT",
+        url: "/appointment/time",
+        data: timeUpdate
     }).then(function (data) {
-      console.log('works')
-      location.href = `/confirm`
+        console.log('works')
+        location.href = `/confirm`
     })
-
-  } else {
-    var snkBar = document.getElementById("snackbar");
-    // Add the "show" class to DIV
-    snkBar.className = "show";
-    //Display selected service
-    document.getElementById("snackbar").innerHTML = "You must select a time!";
-    // After 3 seconds, remove the show class from DIV
-    setTimeout(function () { snkBar.className = snkBar.className.replace("show", ""); }, 3000);
-
-  }
 
 
 })

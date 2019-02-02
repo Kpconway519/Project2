@@ -109,6 +109,7 @@ module.exports = function (app) {
 
 
   app.post("/appointment/new", function (req, res) {
+    console.log("here");
     console.log(req.session.id)
     var appointment = req.body;
     Appointment.create({
@@ -166,7 +167,7 @@ module.exports = function (app) {
 
   app.put("/appointment/time", function (req, res) {
     // THIS IS PART OF THE FUNCTION WHERE THE SESSION IS USED TO FIND THE CORRECT APPOINTMENT AND THE CORRECT BARBER IS THEN SET IN THAT APPOINTMENT ROW.
-
+    console.log(req.body)
     Appointment.update(
       { time: req.body.time },
       { where: { session: req.session.id } }
