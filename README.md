@@ -1,14 +1,14 @@
 #                      **************************************
-#                       |     / /             / /%%%%%%/ / |                                 
-#                       |    / /             / /%%%%%%/ /  |                                 
-#                       |   / /             / /%%%%%%/ /   |                                 
-#                       |  / /             / /%%%%%%/ /    |                                 
-#                       | / /             / /%%%%%%/ /     |                                 
-#                       |/ /             / /%%%%%%/ /      |                                 
-#                       | /             / /%%%%%%/ /       |                                 
-#                       |/             / /%%%%%%/ /        |                                 
-#                       |             / /%%%%%%/ /         |                                 
-#                       |            / /%%%%%%/ /          |
+#                       |/    / /               / /%%%%%%/ |                                 
+#                       |    / /               / /%%%%%%/ /|                                 
+#                       |   / /               / /%%%%%%/ / |                                 
+#                       |  / /               / /%%%%%%/ /  |                                 
+#                       | / /               / /%%%%%%/ /   |                                 
+#                       |/ /               / /%%%%%%/ /    |                                 
+#                       | /               / /%%%%%%/ /     |                                 
+#                       |/               / /%%%%%%/ /      |                                 
+#                       |               / /%%%%%%/ /       |                                 
+#                       |              / /%%%%%%/ /        |
 #
 #                                     Barberoo!
 #
@@ -34,20 +34,25 @@
 * Austin Fortson--Frontend logic and design
 * Christopher Killen--Backend logic and security
 * Mohamed Naji--Graphic design and Theme
-* Wynston Saamoi--
+* Wynston Saamoi--Backend and Frontend
 
 
-
-# Project Purpose
+#                    ///////////////////////////
+#                   //    Project Purpose    //
+#                  ///////////////////////////
 
 We decided to do a project which could be developed into a useful service, while giving the team experience with new technologies, and room to develop expertise with existing skills. With that in mind, Mohamed came up with the idea for Barberoo--a mobile service for ordering a barber to come to your house. Initially, we have the order flow ready, as well as integration with Express Sessions, and plans for expansion including a review system, map integration, and full mobile support.
 
 Not only does this app have the potential to be a legitimate service, but it also reinforced skills which can be easily applied across many different web development roles including order flow design, persistence via express sessions, and security through use of sequelize (reduces the risk of SQL injection) and encryption for passwords.
 
-# How it works
-                               //////////////////
-                              //  Order Flow  //
-                             //////////////////
+#  ///////////////////
+# //      END      //
+#///////////////////
+
+
+#                               ////////////////////
+#                              //  HOW IT WORKS  //
+#                             ////////////////////
 
 Step 0: Go to the /admin page and seed your database with the appropriate barbers and services for your users. 
 
@@ -63,3 +68,8 @@ Step 4: On this screen, the user selects a barber from the options. This pulls f
 Step 5: This is the Appointments screen. Here, you select a time for the appointment. Once that is done, click the button at the bottom again to proceed to the confirmation screen.
 
 Step 6: Confirmation screen. You're all done! This screen recaps and lets you know details of your upcoming appointment.
+
+
+#  //////////////////
+# //      END     //
+#//////////////////
