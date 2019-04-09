@@ -1,18 +1,82 @@
-{{!-- Right now, just making this a loop that goes back to the beginning for dev purposes, later it could be a link to reviews which saves a session id or something, or it could take you to the timer screen that shows you when your barber is going to be on the way, kind of like the "your pizza is being made screen at dominos" --}}
-<h1>Appointment Page</h1>
+<!--Calendar-->
+<body>
+<div class="container col-sm-4 col-md-7 col-lg-4 mt-5 mb-5">
+    <div class="card">
+        <h3 class="card-header" id="MonthAndYear"></h3>
+        <table class="table table-bordered table-responsive-sm" id="calendar">
+            <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+            </thead>
 
+            <tbody id="calendar-body">
+
+            </tbody>
+        </table>
+
+        <div class="form-inline">
+
+            <button class="btn btn-outline-primary col-sm-4 offset-sm-1" id="previous" onclick="previous()">Previous</button>
+            <button class="btn btn-outline-primary col-sm-4 offset-sm-2" id="next" onclick="next()">Next</button>
+        </div>
+        <br/>
+        <form class="form-inline px-3 text-center col-offset-3">
+            {{!-- <label class="lead col-sm-4 offset-sm-2" for="month">Jump To: </label>
+
+            <select class="form-control col-sm-3 p-2" name="month" id="month" onchange="jump()">
+                <option value=0>Jan</option>
+                <option value=1>Feb</option>
+                <option value=2>Mar</option>
+                <option value=3>Apr</option>
+                <option value=4>May</option>
+                <option value=5>Jun</option>
+                <option value=6>Jul</option>
+                <option value=7>Aug</option>
+                <option value=8>Sep</option>
+                <option value=9>Oct</option>
+                <option value=10>Nov</option>
+                <option value=11>Dec</option>
+            </select> --}}
+
+
+            {{!-- <label for="year"></label>
+            <select class="form-control col-sm-4" name="year" id="year" onchange="jump()">
+            <option value=2019>2019</option>
+
+            </select> --}}
+            <input type="hidden" value="test" id="currentDay">
+            <div class="col-sm-12 border-top border-dark mt-4">
+
+            </div>
+                <label class="lead col-sm-4 offset-sm-2 my-3" for="apptTime">Input Time: </label>
+                <input type="time" class="col-sm-4 p-1 border" name="apptTime" id="apptTime">
+
+            
+            <div class="col-sm-12 border-top border-dark">
+
+            <a href="/confirm">
+                <button type="button" class="btn btn-primary col-sm-4 mt-2" id="setTimeConfirm"onClick="">Confirm</button>
+            </a>
+        </form>
+
+
+    </div>
+</div>
+</body>
 <!--Set time and confirm button-->
-<div class="container">
-<form>
-    <input type="text" placeholder="put time here" name="apptTime" id="apptTime">
-</form>
-</div>
 
-<a href="/confirm">
-<button type="button" class="btn btn-primary btn-lg btn-block" id="setTimeConfirm">Set Time and Confirm</button>
-</a>
+
+
+
 </div>
-    <!--End of time and confirm button-->
+<!--End of time and confirm button-->
 
 
 <!--Start of Side Nav-->
@@ -21,40 +85,8 @@
     <a href="/order" id="servicesPage">Go To Services</a>
     <a href="/barber" id="social">Go To Barbers</a>
 </div>
-    <!--End of Side Nav-->
+<!--End of Side Nav-->
 
-<script>
-
-
-$("#setTimeConfirm").on("click", function() {
-      event.preventDefault()
-let selectedTime = $("#apptTime").val().trim();;
-
-
-
-if (selectedTime) {
-          let timeUpdate = {
-            session: `${localStorage.getItem("tempSessionId")}`,
-            time: selectedTime
-          };
-
-      //$.put("appointment/barber", barbUpdate)
-      $.ajax({
-        method: "PUT",
-        url: "/appointment/time",
-        data: timeUpdate
-        }).then(function(data) {
-          console.log('works')
-          location.href = `/confirm/${localStorage.getItem("tempSessionId")}`
-        })
-
-}else{
-  alert('You must Select a Time')
-}
-      
-
-})
-
-
-
+<script src="/assets/js/appointment.js">
 </script>
+</html>

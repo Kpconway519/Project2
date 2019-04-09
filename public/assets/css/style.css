@@ -1,223 +1,396 @@
-	/* Styling for main.handlebars*/
+/* Styling for main.handlebars*/
 body {
-    background-color: #333333
+background-color: #333333
 }
-  
+
 nav {
-    background-color: #cccccc
+background-color: #cccccc
 }
-    /* End Style for main.handlebars*/
- 
+/* End Style for main.handlebars*/
+
+/* Styling for login.handlebars*/
+* {box-sizing: border-box}
+
+/* style the container */
+.loginContainer {
+position: relative;
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px 0 30px 0;
+} 
+
+/* style inputs and link buttons */
+input,
+.loginBtn {
+width: 100%;
+padding: 12px;
+border: none;
+border-radius: 4px;
+margin: 5px 0;
+opacity: 0.85;
+display: inline-block;
+font-size: 17px;
+line-height: 20px;
+text-decoration: none; /* remove underline from anchors */
+}
+
+input:hover,
+.loginBtn:hover {
+opacity: 1;
+}
+
+
+/* style the submit button */
+input[type=submit] {
+color: white;
+cursor: pointer;
+}
+
+
+/* Two-column layout */
+.loginCol {
+float: left;
+width: 50%;
+margin: auto;
+padding: 0 50px;
+margin-top: 6px;
+}
+
+#login {
+background: #163d75;
+}
+
+#makeUser {
+background-color: #af1d1d;
+}
+
+.signUpCol {
+float: left;
+width: 50%;
+margin: auto;
+padding: 0 50px;
+margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.loginRow:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* vertical line */
+.vl {
+position: absolute;
+left: 50%;
+transform: translate(-50%);
+border: 2px solid #333333;
+height: 300px;
+background-color: #333333;
+}
+
+/* text inside the vertical line */
+.inner {
+position: absolute;
+top: 50%;
+transform: translate(-50%, -50%);
+background-color: #ffffff;
+border: 1px solid #ffffff;
+border-radius: 50%;
+padding: 8px 10px;
+}
+
+/* End style for login.handlebars*/
+
 /* Styling for start page */
 .col {
-    padding: 60px
+padding: 60px
 }
 
 #confirm {
-	background-color: #cccccc;
-    color: #333333;
-    font-size: 20PX;
+background-color: #cccccc;
+color: #333333;
+font-size: 20PX;
 }
-  /* Style the tab buttons */
+/* Style the tab buttons */
 .tablink {
-    background-color:#333333;
-    color: #ffffff;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    margin: 20px 0;
-    font-size: 30px;
-    width: 50%;
+background-color:#333333;
+color: #ffffff;
+float: left;
+border: none;
+outline: none;
+cursor: pointer;
+padding: 14px 16px;
+margin: 20px 0;
+font-size: 30px;
+width: 50%;
 
-   
+
 }
-  
-  /* Change background color of buttons on hover */
+
+/* Change background color of buttons on hover */
 .tablink:hover {
-    background-color:#cccccc;
-    color: #333333;
+background-color:#cccccc;
+color: #333333;
 }
-  
-  /* Set default styles for tab content */
+
+/* Set default styles for tab content */
 .tabcontent {
-    color: #ffffff;
-    display: none;
-    padding: 100px;
-    text-align: center;
+color: #ffffff;
+display: none;
+padding: 100px;
+text-align: center;
 }
-  
-  /* Style each tab content individually */ 
+
+/* Style each tab content individually */ 
 #Client {background-color:#333333;}
 #Barber {background-color:#333333;}
 
-  /* End Styling for first page */
+/* End Styling for first page */
 
 /* Styling for the sidenav from W3 Schools */
 #mySidenav a {
-    position: absolute; /* Position them relative to the browser window */
-    left: -80px; /* Position them outside of the screen */
-    transition: 0.3s; /* Add transition on hover */
-    padding: 15px; /* 15px padding */
-    width: 100px; /* Set a specific width */
-    text-decoration: none; /* Remove underline */
-    font-size: 20px; /* Increase font size */
-    color: white; /* White text color */
-    border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+position: absolute; /* Position them relative to the browser window */
+left: -80px; /* Position them outside of the screen */
+transition: 0.3s; /* Add transition on hover */
+padding: 15px; /* 15px padding */
+width: 100px; /* Set a specific width */
+text-decoration: none; /* Remove underline */
+font-size: 20px; /* Increase font size */
+color: white; /* White text color */
+border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
 }
-  
+
 #mySidenav a:hover {
-    left: 0; /* On mouse-over, make the elements appear as they should */
+left: 0; /* On mouse-over, make the elements appear as they should */
 }
-  
+
 #home {
-    top: 60px;
-    background-color: #163d75;
+top: 60px;
+background-color: #163d75;
 }
-  
+
 #barberPage {
-    top: 140px;
-    background-color: #ccc;
+top: 140px;
+background-color: #ccc;
 }
 
 #servicesPage {
-    top: 140px;
-    background-color: #ccc;
+top: 140px;
+background-color: #ccc;
 }  
-  
+
 #social {
-    top: 220px;
-    background-color:#af1d1d;
+top: 220px;
+background-color:#af1d1d;
 }
-    /* End Styling for sidenav */
+/* End Styling for sidenav */
 
 /* Styling for services page */
 .table {
-    background-color: #ffffff;
+background-color: #ffffff;
 }
-    /* End Styling for services page */
+
+#added {
+    color: #af1d1d;
+    text-align: center;
+    
+    
+}
+
+#buton {
+    background-color: #163d75;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    width: 30px;
+    border-radius: 5px;
+    position: relative;
+    left: 80px;   
+}
+
+#buton:hover{
+    background-color: #ccc;
+}
+/* End Styling for services page */
 
 /* Styling for barber page */
 .list-group-item {
-    background-color: #af1d1d
+background-color: #af1d1d
 }
 
 
 .filterDiv {
-  float: left;
-  background-color: #ffffff;
-  color: #333333;
-  width: 100px;
-  line-height: 100px;
-  text-align: center;
-  margin: 2px;
-  display: none;
+float: left;
+background-color: #ffffff;
+color: #333333;
+width: 100px;
+line-height: 100px;
+text-align: center;
+margin: 2px;
+display: none;
 }
 
 .show {
-  display: block;
+display: block;
 }
 
 .container {
-  margin-top: 20px;
-  overflow: hidden;
+margin-top: 20px;
+overflow: hidden;
 }
 
 /* Style the buttons */
 
 .btn {
-  border: none;
-  outline: none;
-  padding: 12px 16px;
-  background-color: #163d75;
-  color: #ffffff;
-  cursor: pointer;
+border: none;
+outline: none;
+padding: 12px 16px;
+background-color: #163d75;
+color: #ffffff;
+cursor: pointer;
 }
 
 .btn:hover {
-  background-color:#cccccc;
+background-color:#cccccc;
 }
 
 .btn.active {
-  background-color: #ccc;
-  color: #ffffff;
+background-color: #ccc;
+color: #ffffff;
 }
 
-    /* End styling for barber page */
+#overlay {
+position: fixed;
+display: none;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0,0,0,0.5);
+z-index: 2;
+cursor: pointer;
+}
+
+#overlayText{
+position: absolute;
+top: 80%;
+left: 50%;
+font-size: 30px;
+text-align: center;
+color: white;
+transform: translate(-50%,-50%);
+-ms-transform: translate(-50%,-50%);
+}
+
+#overlayBarberName {
+position: absolute;
+top: 50%;
+left: 50%;
+font-size: 50px;
+text-align: center;
+color: white;
+transform: translate(-50%,-50%);
+-ms-transform: translate(-50%,-50%);
+}
+
+/* Position the close button (top right corner) */
+#overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    color: white
+  }
+/* Select barber button */
+.selectBarber {
+    background-color: #163d75;
+    color: white;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 30px
+}
+
+.selectBarber:hover {
+    background-color: #ccc
+}
+/* End styling for barber page */
 
 /* Styling for order page */
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
-    visibility: hidden; /* Hidden by default. Visible on click */
-    min-width: 250px; /* Set a default minimum width */
-    margin-left: -125px; /* Divide value of min-width by 2 */
-    background-color: #cccccc; /* Black background color */
-    color: #333333; /* White text color */
-    text-align: center; /* Centered text */
-    border-radius: 2px; /* Rounded borders */
-    padding: 16px; /* Padding */
-    position: fixed; /* Sit on top of the screen */
-    z-index: 1; /* Add a z-index if needed */
-    left: 50%; /* Center the snackbar */
-    bottom: 30px; /* 30px from the bottom */
-  }
-  
-  /* Show the snackbar when clicking on a button (class added with JavaScript) */
-  #snackbar.show {
-    visibility: visible; /* Show the snackbar */
-    /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
-    However, delay the fade out process for 2.5 seconds */
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  }
-  
-  /* Animations to fade the snackbar in and out */
-  @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
-  }
-  
-  @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
-  }
-  
-  @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
-  }
-  
-  @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
-  }
+visibility: hidden; /* Hidden by default. Visible on click */
+min-width: 250px; /* Set a default minimum width */
+margin-left: -125px; /* Divide value of min-width by 2 */
+background-color: #cccccc; /* Black background color */
+color: #333333; /* White text color */
+text-align: center; /* Centered text */
+border-radius: 2px; /* Rounded borders */
+padding: 16px; /* Padding */
+position: fixed; /* Sit on top of the screen */
+z-index: 1; /* Add a z-index if needed */
+left: 50%; /* Center the snackbar */
+bottom: 30px; /* 30px from the bottom */
+}
 
-    /*End Styling for order page */
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+visibility: visible; /* Show the snackbar */
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+from {bottom: 0; opacity: 0;} 
+to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+from {bottom: 0; opacity: 0;}
+to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+from {bottom: 30px; opacity: 1;} 
+to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+from {bottom: 30px; opacity: 1;}
+to {bottom: 0; opacity: 0;}
+}
+
+/*End Styling for order page */
 
 /* Styling for Appointment Page */
 
-    /* End stylign for Appointment Page */
+/* End stylign for Appointment Page */
 
 /*Styling for confirm page */
 #checkImage {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
 
 #confirmDiv {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background-color:#ffffff;
-    padding: 20px;
-    text-align: center;
-    width: 800px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+background-color:#ffffff;
+padding: 20px;
+text-align: center;
+width: 800px;
 }
 
 #countDown {
-    color: #af1d1d;
+color: #af1d1d;
 }
 
-    /* End styling for confirm page */
+/* End styling for confirm page */

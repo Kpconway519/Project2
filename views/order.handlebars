@@ -14,22 +14,21 @@
         <tbody id="table">
             {{#each services}}
             <tr>
-                <td id = "name">        {{name}}</td>
-                <td id = "description"> {{description}}</td>
-                <td id = "price">       {{price}}</td>
-                <td id = "duration">    {{duration}}</td>
-                {{!-- for the add services button, I think the bootstrap classes are messing up the function. Not sure how to get around that for now. --}}
-                <td><button data-id="{{id}}" data-cost="{{price}}" data-duration="{{duration}}" class="addServ" type="button" class="btn btn-primary" >Add</button></td>
+                <td id="name"> {{name}}</td>
+                <td id="description"> {{description}}</td>
+                <td id="price"> {{price}}</td>
+                <td id="duration"> {{duration}}</td>
+                {{!-- for the add services button, I think the bootstrap classes are messing up the function. Not sure
+                how to get around that for now. --}}
+                <td id="addButton"><span id="buton" data-id="{{id}}" data-name="{{name}}" data-cost="{{price}}" data-duration="{{duration}}"
+                        class="addServ">Add</span></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
-    <!--End of Table-->
+<!--End of Table-->
 
-<!--Snackbar pop up confirming selection of service-->
-<div id = "snackbar"></div>
-    <!--End of snackbar pop up-->
 
 <!--Start of Side Nav-->
 <div id="mySidenav" class="sidenav">
@@ -54,198 +53,30 @@
         });
 
         function searchBar() {
-        // Declare variables
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('myInput');
-        filter = input.value.toUpperCase();
-        table = document.getElementById("table");
-        td = ul.getElementsByTagName('td');
+            // Declare variables
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table");
+            td = ul.getElementsByTagName('td');
 
-        // Loop through all list items, and hide those who don't match the search query
-        for (i = 0; i < td.length; i++) {
-        a = td[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        td[i].style.display = "";
-        } else {
-        td[i].style.display = "none";
-            }
-        }
-        }
-        })
-</script>
-    <!--End of search Script-->
-
-<script>
-    let servArray = [];
-    let globalCostArray = [];
-    let globalDurationArray = [];
-    let totalDuration = 0;
-    let totalCost = 0;
-
-
-    //function that affects the add buttons to add them to the array.
-    $(".addServ").on("click", function (event) {
-        event.preventDefault()
-        if (servArray.length < 3) {
-            var servID = $(this).data("id")
-            servArray.push(servID)
-
-            var servCost = $(this).data("cost");
-            globalCostArray.push(servCost);
-            var servDuration = $(this).data("duration");
-            globalDurationArray.push(servDuration);
-
-
-        var x = document.getElementById("snackbar");
-        // Add the "show" class to DIV
-        x.className = "show";
-        //Display selected service
-        document.getElementById("snackbar").innerHTML ="Service has been added!";
-        // After 3 seconds, remove the show class from DIV
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-
-
-            console.log(servArray)
-            console.log(globalCostArray)
-            console.log(globalDurationArray)
-        } else {
-            alert("You may only add up to 3 services!");
-
-            var x = document.getElementById("snackbar");
-            // Add the "show" class to DIV
-            x.className = "show";
-            //Display selected service
-            document.getElementById("snackbar").innerHTML ="Service has been added, Cart is now full!";
-            // After 3 seconds, remove the show class from DIV
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-
-
-        };
-    })
-
-    //function which acts when you click the submit button at the bottom of the page.
-
-    $("#goToBarber").on("click", function (event) {
-        event.preventDefault();
-
-        let makeAppointment = function (appObj) {
-            $.post("/appointment/new", appObj)
-                .then(function (data) {
-                    console.log(data);
-                    alert("Adding new appointment");
-                });
-        }
-
-
-//* Comments from the comment blank will be put into the “comments” section
-//* Cost gets calculated on this page—just add up the total cost of the services selected.
-//* Duration, like price, just adds up all the durations and puts it as an integer into the appointments table. 
-
-let calculateCost = function() {
-    //take the cost and just add it up depending on how many items are in the servArray
-    for (i = 0; i < globalCostArray.length; i++) {
-        //to calculate the cost, I need to take it from the page.
-        totalCost += globalCostArray[i];
-    };
-};
-
-let calculateDuration = function() {
-    //take the cost and just add it up depending on how many items are in the servArray
-    for (i = 0; i < globalDurationArray.length; i++) {
-        totalDuration += globalDurationArray[i];
-    };
-};
-
-
-
-        let pushServicesToDb = function (cb) {
-
-            if (servArray.length === 0) {
-                alert("you must select at least one service")
-            } else {
-                //make a new appointment, starting with the services selected from the servArray
-
-                if (servArray.length === 1) {
-                    calculateCost();
-                    calculateDuration();
-                    addServicesObject = {
-                            accepted: false,
-                            comments: "leaving comments like this for now",
-                              // CHRIS, I'M PUTTING THE SESSION HERE
-
-                            session: localStorage.getItem("tempSessionId"),
-                            customer_id: 1 /*change this to the correct value later*/,
-                            barber_id: 1 /*change this to the correct value later*/,
-                            time: totalDuration,
-                            location: "blank for now, later customer location",
-                            cost: totalCost,
-                            service_1: servArray[0],
-                            paid: false,
-                            completed: false
-                    }
-                    makeAppointment(addServicesObject)
-                } else if (servArray.length === 2) {
-                    calculateCost();
-                    calculateDuration();
-                    addServicesObject = {
-                        accepted: false,
-                        comments: "leaving comments like this for now",
-                          // CHRIS, I'M PUTTING THE SESSION HERE
-
-                        session: localStorage.getItem("tempSessionId"),
-                        customer_id: 1 /*change this to the correct value later*/,
-                        barber_id: 1 /*change this to the correct value later*/,
-                        time: totalDuration,
-                        location: "blank for now, later customer location",
-                        cost: totalCost,
-                        service_1: servArray[0],
-                        service_2: servArray[1],
-                        paid: false,
-                        completed: false
-                    }
-                    makeAppointment(addServicesObject)
-                } else if (servArray.length === 3) {
-                    calculateCost();
-                    calculateDuration();
-                    addServicesObject = {
-                            accepted: false,
-                            comments: "leaving comments like this for now",
-                              // CHRIS, I'M PUTTING THE SESSION HERE
-                            session: localStorage.getItem("tempSessionId"),
-                            customer_id: 1 /*change this to the correct value later*/,
-                            barber_id: 1 /*change this to the correct value later*/,
-                            time: totalDuration,
-                            location: "blank for now, later customer location",
-                            cost: totalCost,
-                            service_1: servArray[0],
-                            service_2: servArray[1],
-                            service_3: servArray[2],
-                            paid: false,
-                            completed: false
-                    }
-                    makeAppointment(addServicesObject)
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < td.length; i++) {
+                a = td[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    td[i].style.display = "";
+                } else {
+                    td[i].style.display = "none";
                 }
-
-            };
-            cb()
-        }
-        //then go to the next page when that is done
-
-        pushServicesToDb(function() {
-            //put a callback function here which fires after the appointment is created, and then just loads the next page.
-            if (servArray >= 1) {
-
-            location.href = "/barber"
-            }else{
-                alert('you must select at least one service')
             }
-        })
-
-        //* The Id for the appointment row will be stored in local storage.
-
+        }
     })
+</script>
+<!--End of search Script-->
+
+<script src="/assets/js/order.js">
 </script>
 
 
-{{!-- <-- * There should be a blank for comments at the bottom,--> --}}
+{{!-- <-- Blank for customer comments to be added later--> --}}

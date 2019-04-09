@@ -18,7 +18,7 @@
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <a class="navbar-brand" href="/" id="logo"><img src="assets/image/barberoo2.jpg" alt="" width="300px" height="100px"></a>
+            <a class="navbar-brand" href="/" id="logo"><img src="/assets/image/barberoo2.jpg" alt="" width="300px" height="100px"></a>
           </div>
           <button class="navbar-toggler collapsed ml-auto" data-toggle="collapse" data-target="#page-nav-collapse" aria-expanded="false">
               <span class="sr-only">Toggle navigation</span>
@@ -26,25 +26,19 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="page-nav-collapse">
-            <ul class="nav navbar-nav ml-auto">
-              <li>
-                <a class="nav-link" href="">Login</a>
-              </li>
-              <li>
-                <a class="nav-link" href="">Sign Up</a>
-              </li>
-            </ul>
-          </div>
-          <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
+        {{#if session}}
+        <div class="ml-auto mr-5 mt-5">
+            <a href="api/signout" style="color: black"><h3>Signout</h3></a>
+        </div>
+        {{/if}}
       </nav>
       <!-- End of navbar -->
 
 
 		{{{ body }}}
+    <div id="snackbar"></div>
 	</body>
     <script src="/assets/js/script.js"></script>
 

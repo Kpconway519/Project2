@@ -1,14 +1,38 @@
-<h1>Login</h1>
-<form action="/{{type}}/login" method="POST">
-  <label for="username"> Username</label><input type="text" name="username">
-  <br>
-  <label for="password"> Password</label><input type="password" name="password">
-  <button>submit</button>
-</form>
-<br><br><br><br>
-<h1>Signup</h1>
-<form action="/{{type}}/signup" method="POST">
-  <input type="text" name="username">
-  <input type="password" name="password">
-  <input type="text">
-</form>
+
+<!--Login and sign up container-->
+<div class="container">
+  <div class="loginContainer">
+    <div class="loginRow">
+      <!--Login and Signup Header-->
+      <h2 style="text-align:center">Login or Sign Up</h2>
+      {{#if error}}
+        <h3 style="text-align:center; color: red">{{error}}</h1>
+      {{/if}}
+      <!--Divider line-->
+      <div class="vl">
+        <span class="vl-innertext"></span>
+      </div>
+      <!--Login Side-->
+
+      <form action="/{{type}}/login" method="POST">
+        <div class="loginCol">
+          <input type="text" name="username" placeholder="Username" required>
+          <input type="password" name="password" placeholder="Password" required>
+          <input type="submit" value="Login" id="login">
+        </div>
+      </form>
+      <!--Signup Side-->
+      <form action="/{{type}}/signup" method="POST">
+        <div class="signUpCol">
+          <input type="text" name="firstName" placeholder="firstname" id="firstname">
+          <input type="text" name="lastName" placeholder="lastname" id="lastname">
+          <input type="text" name="location" placeholder="location" id="location">
+          <input type="text" name="gender" placeholder="gender" id="gender">
+          <input type="text" name="ethnicity" placeholder="ethnicity" id="ethnicity">
+          <input type="text" name="username" placeholder="username" id="username">
+          <input type="text" name="password" placeholder="password" id="password">
+          <input type="submit" value="Sign Up" id="makeUser">
+        </div>
+      </form>
+    </div>
+    <!--End of login and signup container-->

@@ -16,12 +16,20 @@ var Service = require("../models/services.js");
 const multer = require('multer');
 const upload = multer();
 
+//bcrypt
+const bcrypt = require('bcryptjs');
+
 // Routes
 // =============================================================
 module.exports = function (app) {
   // Search for Specific Character (or all characters) then provides JSON
 
-  // If a user sends data to add a new character...
+
+
+                          //////////////////////
+                         // ADD a new barber //
+                        //////////////////////
+
   app.post("/barber/new", function (req, res) {
 
     var barber = req.body
@@ -34,6 +42,15 @@ module.exports = function (app) {
     res.status(204).end();
 
   });
+
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ////////////////////////
+                         // ADD a new customer //
+                        ////////////////////////
 
   app.post("/customer/new", function (req, res) {
 
@@ -56,6 +73,15 @@ module.exports = function (app) {
 
   });
 
+  //////////////////////
+ //       END        //
+//////////////////////
+
+
+                          ////////////////////////
+                         // POST a new service //
+                        ////////////////////////
+
   app.post("/service/new", function (req, res) {
 
     var service = req.body
@@ -70,14 +96,26 @@ module.exports = function (app) {
 
   });
 
-  app.post("/appointment/new", function (req, res) {
-    var appointment = req.body
+  //////////////////////
+ //        END       //
+//////////////////////
 
+
+                          ////////////////////////////
+                         // POST a new appointment //
+                        ////////////////////////////
+
+
+
+
+  app.post("/appointment/new", function (req, res) {
+    console.log("here");
+    console.log(req.session.id)
+    var appointment = req.body;
     Appointment.create({
       accepted: appointment.accepted,
       comments: appointment.comments,
-      // CHRIS, I'M PUTTING THE SESSION ID HERE
-      session: appointment.session,
+      session: req.session.id,
       customer_id: appointment.customer_id,
       barber_id: appointment.barber_id,
       duration: appointment.time,
@@ -90,109 +128,218 @@ module.exports = function (app) {
       completed: appointment.completed
 
     });
+
     res.render("barber.handlebars")
 
   });
 
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ////////////////////////////////////////////////////
+                         // UPDATE a new barber to the created appointment //
+                        ////////////////////////////////////////////////////
+
   app.put("/appointment/barber", function (req, res) {
     // THIS IS PART OF THE FUNCTION WHERE THE SESSION IS USED TO FIND THE CORRECT APPOINTMENT AND THE CORRECT BARBER IS THEN SET IN THAT APPOINTMENT ROW.
-      // console.log(req)
+    // console.log(req)
     //find the appointment where session === the passed in session value and replace the column "barber" with the passed value.
-      Appointment.update(
-        {barber_id: req.body.barber},
-        {where: {session: req.body.session}}
-      ).then(function(rowsUpdated) {
-        res.render("appointment.handlebars")
-      })
+
+    Appointment.update(
+      { barber_id: req.body.barber },
+      { where: { session: req.session.id } }
+    ).then(function (rowsUpdated) {
+      res.render("appointment.handlebars")
+    })
 
   })
-    
-    
+
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ///////////////////////////////////////////////////
+                         // UPDATE the appointment with the selected time //
+                        ///////////////////////////////////////////////////
+
   app.put("/appointment/time", function (req, res) {
     // THIS IS PART OF THE FUNCTION WHERE THE SESSION IS USED TO FIND THE CORRECT APPOINTMENT AND THE CORRECT BARBER IS THEN SET IN THAT APPOINTMENT ROW.
+    console.log(req.body)
+    Appointment.update(
+      { time: req.body.time },
+      { where: { session: req.session.id } }
+    ).then(function (rowsUpdated) {
 
-      Appointment.update(
-        {time: req.body.time},
-        {where: {session: req.body.session}}
-      ).then(function(rowsUpdated) {
-        res.render("confirm.handlebars")
-      })
+      res.render("confirm.handlebars")
+    })
 
-  })  
-    
+  })
+
+  //////////////////////
+ //        END       //
+//////////////////////
 
 
-    app.post("/customer/login", upload.array(), function (req, res) {
-      //check to see if login worked
-      Customer.findOne({ where: { username: req.body.username } }).then((dbPost) => {
-        if (dbPost.password === req.body.password) {
+                          //////////////////////////////
+                         //     customer login       //
+                        //////////////////////////////
 
-          console.log(req.sessionId);
-          req.session.authenticated = true;
-          res.send(req.session.id);
-        } else {
-          res.send("Failure");
-        }
-      });
+  app.post("/customer/login", upload.array(), function (req, res) {
+    //check to see if login worked
+    console.log(req.body)
+    Customer.findOne({ where: { username: req.body.username } }).then((dbPost) => {
+      if(dbPost !== null) {
+        bcrypt.compare(req.body.password, dbPost.password, function(err, loggedIn) {
+          if(loggedIn) {
+            console.log(req.sessionId);
+            req.session.authenticated = true;
+            res.redirect("/order"); 
+           // Passwords match
+          } else {
+           // Passwords don't match
+           res.render("login.handlebars", { "type" : "customer",
+                                            "error" : "Error processing request try again" })
+          } 
+        });
+      } else {
+        res.render("login.handlebars", { "type" : "customer",
+        "error" : "Error processing request try again" })
+      }
+
     });
+  });
 
-    app.post("/barber/login", upload.array(), function (req, res) {
-      //check to see if login worked
-      Barber.findOne({ where: { username: req.body.username } }).then((dbPost) => {
-        if (dbPost.password === req.body.password) {
-          req.session.authenticated = true;
-          res.send(req.session.id);
-        } else {
-          res.send("Failure");
-        }
-      });
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ///////////////////////////////////////
+                         //            barber login           //
+                        ///////////////////////////////////////
+
+  app.post("/barber/login", upload.array(), function (req, res) {
+    //check to see if login worked
+    Barber.findOne({ where: { username: req.body.username } }).then((dbPost) => {
+      if(dbPost !== null) {
+        bcrypt.compare(req.body.password, dbPost.password, function(err, loggedIn) {
+          if(loggedIn) {
+            console.log(req.sessionId);
+            req.session.authenticated = true;
+            res.send(req.session.id);
+           // Passwords match
+          } else {
+           // Passwords don't match
+           res.render("login.handlebars", { "type" : "barber",
+           "error" : "Error processing request try again" })
+          } //
+        });
+      } else {
+        res.render("login.handlebars", { "type" : "barber",
+        "error" : "Error processing request try again" })  
+      }
+
     });
-    
-    //Correctly use sequelize to force only one to exist and catch that error instead of findone first
-    //Also don't forget to grab and store all information that is needed
-    app.post("/customer/signup", upload.array(), function (req, res) {
-      let username = req.body.username;
-      let password = req.body.password;
-      Customer.findOne({ where: { username: username } }).then((dbpost) => {
-        console.log(dbpost)
-        if (dbpost === null) {
+  });
+
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ////////////////////////////////////////////////////
+                         //              customer signup                   //
+                        ////////////////////////////////////////////////////
+
+  //Correctly use sequelize to force only one to exist and catch that error instead of findone first
+  //Also don't forget to grab and store all information that is needed
+  app.post("/customer/signup", upload.array(), function (req, res) {
+    let username = req.body.username;
+    let password = req.body.password;
+    let first_name = req.body.firstName;
+    let last_name = req.body.lastName;
+    let location = req.body.location;
+    let gender = req.body.gender;
+    let ethnicity = req.body.ethnicity;
+
+    Customer.findOne({ where: { username: username } }).then((dbpost) => {
+      console.log(dbpost)
+      if (dbpost === null) {
+        bcrypt.hash(password, 10, function(err, hash) {
+          // Store hash in database
           Customer.create({
             username: username,
-            password: password
+            password: hash,
+            first_name: first_name,
+            last_name: last_name,
+            location: location,
+            gender: gender,
+            ethnicity: ethnicity
+  
           }).then(dbPost => {
             //Sign up Success
-
-            res.send("Made");
+  
+            res.redirect("/order");
           });
-        } else {
-          //redirect with username exist
-          res.send("Existing username");
-        }
-      });
 
-    })
-    //Correctly use sequelize to force only one to exist and catch that error instead of findone first
-    //Also don't forget to grab and store all information that is needed
-    app.post("/barber/signup", upload.array(), function (req, res) {
-      let username = req.body.username;
-      let password = req.body.password;
-      Barber.findOne({ where: { username: username } }).then((dbpost) => {
-        console.log(dbpost)
-        if (dbpost === null) {
+        });
+
+      } else {
+        //redirect with username exist
+        res.render("login.handlebars", { "type" : "customer",
+                    "error" : "Username already exist" })
+      }
+    });
+
+  })
+
+  //////////////////////
+ //        END       //
+//////////////////////
+
+
+                          ////////////////////////////////////////////////////
+                         //               barber signup                    //
+                        ////////////////////////////////////////////////////
+
+  //Correctly use sequelize to force only one to exist and catch that error instead of findone first
+  //Also don't forget to grab and store all information that is needed
+  app.post("/barber/signup", upload.array(), function (req, res) {
+    let username = req.body.username;
+    let password = req.body.password;
+    Barber.findOne({ where: { username: username } }).then((dbpost) => {
+      console.log(dbpost)
+      if (dbpost === null) {
+        bcrypt.hash(password, 10, function(err, hash) {
           Barber.create({
             username: username,
-            password: password
+            password: hash
           }).then(dbPost => {
             //Sign up Success
-
-            res.send("Made");
+  
+            res.redirect("/order");
           });
-        } else {
-          //redirect with username exist
-          res.send("Existing username");
-        }
-      });
+        });
 
-    })
+      } else {
+        //redirect with username exist
+        res.render("login.handlebars", { "type" : "barber",
+                    "error" : "Username already exist" })      }
+    });
+
+  })
+
+  app.get("/api/signout", function(req, res) {
+    req.session.authenticated = false;
+    res.redirect("/");
+  })
+
+  //////////////////////
+ //        END       //
+//////////////////////
+
 
 }; //end of module.exports
