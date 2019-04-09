@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
-var PORT = Process.env.PORT || 9002;
+var PORT = process.env.PORT || 9002;
 
 var app = express();
 
