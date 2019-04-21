@@ -1,46 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-		<title>Barberoo</title>
-		    <!--jquery-->
-	<script src="https://code.jquery.com/jquery.js"></script>
-     <!-- Boostrap Stylesheet -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- Link to the stylesheet -->        
-    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
-    <!--Favicon for web tab-->
-    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4nmOz477bsbMibemakwOw9NiwIGGnUaWoPmv_ecYRmQOcav-eeA" type="image/gif" sizes="16x16">
+  <meta charset="UTF-8">
+  <title>Barberoo</title>
+  <!--jquery-->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <!-- Boostrap Stylesheet -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Link to the stylesheet -->
+  <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+  <!--Favicon for web tab-->
+  <link rel="icon"
+    href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4nmOz477bsbMibemakwOw9NiwIGGnUaWoPmv_ecYRmQOcav-eeA"
+    type="image/gif" sizes="16x16">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 </head>
+
 <body>
-	<!--Navbar from bootstrap-->
-    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/" id="logo"><img src="/assets/image/barberoo2.jpg" alt="" width="300px" height="100px"></a>
-          </div>
-          <button class="navbar-toggler collapsed ml-auto" data-toggle="collapse" data-target="#page-nav-collapse" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-        </div>
-        <!-- /.container -->
-        {{#if session}}
-        <div class="ml-auto mr-5 mt-5">
-            <a href="api/signout" style="color: black"><h3>Signout</h3></a>
-        </div>
-        {{/if}}
-      </nav>
-      <!-- End of navbar -->
+  <!--Navbar from bootstrap-->
+  <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/" id="logo"><img src="/assets/image/barberoo2.jpg" alt="" width="300px"
+            height="100px"></a>
+      </div>
+      <button class="navbar-toggler collapsed ml-auto" data-toggle="collapse" data-target="#page-nav-collapse"
+        aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    {{!-- Info button for the modal. --}}
+    <div>
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modelId">
+        Info
+      </button>
+    </div>
+    <!-- /.container -->
+    {{#if session}}
+    <div class="ml-auto mr-5 mt-5">
+      <a href="api/signout" style="color: black">
+        <h3>Signout</h3>
+      </a>
+    </div>
+    {{/if}}
+  </nav>
+  <!-- End of navbar -->
 
 
-		{{{ body }}}
-    <div id="snackbar"></div>
-	</body>
-    <script src="/assets/js/script.js"></script>
+  {{{ body }}}
+  <div id="snackbar"></div>
+
+
+  <!-- Information Modal -->
+  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Welcome to Barberoo!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Barberoo is a service for on-demand barbers. Start by clicking on "Looking for a Haircut", then make a login
+            or create a new one. After that, select your services, your barber, and your time, and that's it. Your
+            barber is on the way!
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+<script src="/assets/js/script.js"></script>
 
 
 </html>
