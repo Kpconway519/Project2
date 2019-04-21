@@ -38,14 +38,15 @@
       </button>
     </div>
     {{!-- Info button for the modal. --}}
-    <div>
-      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modelId">
-        Info
-      </button>
+    
+    <div class="nav-item ml-auto mr-5 mt-5">
+      <a style="color: black">
+        <h3 data-toggle="modal" data-target="#modelId">Info</h3>
+      </a>
     </div>
     <!-- /.container -->
     {{#if session}}
-    <div class="ml-auto mr-5 mt-5">
+    <div class="nav-item ml-auto mr-5 mt-5">
       <a href="api/signout" style="color: black">
         <h3>Signout</h3>
       </a>
